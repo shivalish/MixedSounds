@@ -5,6 +5,7 @@ You are to start your team project here. Read the documentation for
 creative web application idea!
 
 # Group Members
+Griffin Ridosh https://github.com/griffinridosh
 
 # Data
 
