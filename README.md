@@ -9,6 +9,8 @@ Shivali Shrivastava https://github.com/shivalish
 
 Sebastian Harder https://github.com/sebastianh
 
+Rachana Reddy https://github.com/rachanakreddy
+
 # Innovative Idea
 Our idea is for a music discovery application that allows you to listen to a random song and give it a rating. This website would use an api from some music provider's database with various genres and artists, so you can explore and discover new music. After rating a song, the website saves your rating, allowing you to keep track of your listening history and revisit the songs you liked. A lot of other applications give you recommendations based on your interests but ours will be random so you discover new songs you may have never listened to otherwise.
 
@@ -36,3 +38,4 @@ The functionality of our application includes the following:
 * **data linked to user account** - all elements of this application will be saved to a specific user, and future sessions of a given user will load previously saved data so that the user can accumulate more listening data over time.
 
 # License
+[MIT License](https://opensource.org/licenses/MIT)
