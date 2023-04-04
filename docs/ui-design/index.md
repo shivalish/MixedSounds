@@ -2,6 +2,7 @@
 
 ## Wireframe
 
+![alt text](../ui-design/images/landingpage.png)
 
 ## Stories
 
