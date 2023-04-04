@@ -3,6 +3,7 @@
 ## Wireframe
 
 ![alt text](../ui-design/images/landingpage.png)
+![alt text](../ui-design/images/sign-in-page.png)
 
 ## Stories
 
