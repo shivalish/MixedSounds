@@ -1,3 +1,11 @@
 // here for expressjs will add more in later
-import { Express } from "express";
-console.log("test");
+const express = require("express");
+const server = express();
+const port = 3000;
+path = require('path');
+server.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, '../client/index.html'));
+});
+server.listen(port, () => {
+    console.log(`Hello we are on port: ${port}`);
+});
