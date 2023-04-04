@@ -2,6 +2,40 @@
 
 ## Wireframe
 
+![alt text](../ui-design/images/landingpage.png)
+![alt text](../ui-design/images/sign-in-page.png)
+
+The website will begin with the landing page followed by the sign-in page directly underneath. Here users can input a username
+and password and either use the credentials to sign into an existing account or create a new account.
+
+![alt text](../ui-design/images/homepage.png)
+
+The user will then be navigated to the homepage. 
+
+![alt text](../ui-design/images/homepagenavbar.png)
+![alt text](../ui-design/images/homepagerating.png)
+
+The user can listen to the song and then give a rating. They also have the option to replay the song, add it to a playlist, or select another genre.
+
+![alt text](../ui-design/images/listeninghistorynavbar.png)
+
+The user can navigate to the listening history page to view past songs.
+
+![alt text](../ui-design/images/listeninghistory.png)
+![alt text](../ui-design/images/listeninghistoryp2.png)
+
+They also have the option to re-rate past songs
+
+![alt text](../ui-design/images/playlists.png)
+![alt text](../ui-design/images/playlistsp2.png)
+
+The user can also navigate to playlists. They can play a previous playlists and create new playlists. They also
+have the option to export the playlist to Spotify.
+
+![alt text](../ui-design/images/playlists.png)
+![alt text](../ui-design/images/playlistsp2.png)
+
+The user also has the option to dynamically add songs to playlists.
 
 ## Stories
 
@@ -25,10 +59,4 @@ Story #5
 
 The user wants to create a new playlist so they hit the button. They want to create a new playlist based off of their listening history so they filter by songs rated 5/5 and under the genre of pop. The user hits create and a playlist is generated.
 
-## HTML & CSS Mockup
-
 ## References
-
-- [Link 1](https://example.com)
-- [Link 2](https://example.com)
-- [Link 3](https://example.com)
