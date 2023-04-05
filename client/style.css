@@ -1,0 +1,28 @@
+body {
+    margin: 0;
+}
+
+*{
+    margin:0;
+    padding:0;
+  }
+
+.landing {
+    background-image: url('../docs/ui-design/images/landingpage.png');
+}
+
+.login {
+    background-image: url('../docs/ui-design/images/loginbackground.png');
+}
+
+#landing, #login {
+    background-size: cover;
+    background-position: center;
+    min-height: 100vh;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    padding:0 20px;
+}
