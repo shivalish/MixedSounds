@@ -1,0 +1,79 @@
+body {
+    margin: 0;
+}
+
+*{
+    margin:0;
+    padding:0;
+    font-family: 'Poppins', sans-serif;
+    font-size: 15px;
+}
+
+.wrapper {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 10px;
+    grid-auto-rows: minmax(100px, auto);
+  }
+  .one {
+    grid-column: 1;
+    grid-row: 1;
+  }
+  .two {
+    grid-column: 1;
+    grid-row: 2;
+  }
+  .three {
+    grid-column: 1;
+    grid-row: 3;
+  }
+
+
+.landing {
+    background-image: url('../docs/ui-design/images/landingpage.png');
+}
+
+.login {
+    background-image: url('../docs/ui-design/images/loginbackground.png');
+}
+
+#landing, #login {
+    background-size: cover;
+    background-position: center;
+    min-height: 100vh;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    padding:0 20px;
+}
+
+#login-header {
+    font-family: 'Poppins', sans-serif;
+    font-size: 50px;
+}
+
+#text {
+    font-size: 20px;
+}
+
+.btn-default {
+    background-color: #ED5A24 !important;
+    color: #FFFBF6 !important;
+    border-radius: 25px !important;
+    width: 125px;
+}
+
+.btn-default:hover {
+    background-color: #D6450F !important;
+}
+
+input {
+    border-radius: 25px;
+    background-color: #FFFBF6;
+    border-width:0.03cm;
+    border-color: black;
+    width: 250px;
+    text-indent: 10px;
+}

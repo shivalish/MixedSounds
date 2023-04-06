@@ -59,4 +59,7 @@ Story #5
 
 The user wants to create a new playlist so they hit the button. They want to create a new playlist based off of their listening history so they filter by songs rated 5/5 and under the genre of pop. The user hits create and a playlist is generated.
 
+## HTML & CSS Mockup
+
 ## References
+https://www.canva.com/design/DAFe4E0Fxwc/1MjNLwMfCSAkY3C-9CN9xA/view?utm_content=DAFe4E0Fxwc&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton
