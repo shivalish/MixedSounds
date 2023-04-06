@@ -28,15 +28,6 @@ body {
     grid-row: 3;
   }
 
-
-.landing {
-    background-image: url('../docs/ui-design/images/landingpage.png');
-}
-
-.login {
-    background-image: url('../docs/ui-design/images/loginbackground.png');
-}
-
 #landing, #login {
     background-size: cover;
     background-position: center;
