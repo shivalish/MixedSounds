@@ -2,7 +2,7 @@ body {
     margin: 0;
     background-size: cover;
     background-position: center;
-    background-image: url('../docs/ui-design/images/listeninghistorybg.png');
+    background-image: url('../images/mainpagebackground.png');
     min-height: 100vh;
     display:flex;
     flex-direction:column;
