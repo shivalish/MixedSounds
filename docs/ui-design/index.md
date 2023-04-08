@@ -62,5 +62,7 @@ The user wants to create a new playlist so they hit the button. They want to cre
 ## HTML & CSS Mockup
 <!--TODO!-->
 
+![alt text](../ui-design/images/mainpage-HTML.PNG)
+
 ## References
 https://www.canva.com/design/DAFe4E0Fxwc/1MjNLwMfCSAkY3C-9CN9xA/view?utm_content=DAFe4E0Fxwc&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton
