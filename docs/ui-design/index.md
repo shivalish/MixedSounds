@@ -61,7 +61,14 @@ The user wants to create a new playlist so they hit the button. They want to cre
 
 ## HTML & CSS Mockup
 
+![](../ui-design/images/website/index1.png)
+![](../ui-design/images/website/index2.png)
+
+This is the current state of our website. It begins with the welcome page, where we have a full page banner and then once the user scrolls down, they are able to log in or sign up for Mixed Sounds.
+
 ![](../ui-design/images/website/mainpage.png)
+
+Once logged into the website, the user is presented with the listening page as the homepage, and a dynamic navigation bar at the top can be hidden and shown as the user wishes. The current page is highlighted in the navbar, and at the right there is a log out button to end the user's session.
 
 ## References
 https://www.canva.com/design/DAFe4E0Fxwc/1MjNLwMfCSAkY3C-9CN9xA/view?utm_content=DAFe4E0Fxwc&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton
