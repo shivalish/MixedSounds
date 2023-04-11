@@ -2,7 +2,7 @@ body {
   margin: 0;
   background-size: cover;
   background-position: center;
-  background-image: url('../images/appBackground.png');
+  /*background-image: url('../images/appBackground.png');*/
   min-height: 100vh;
   display:flex;
   flex-direction:column;
@@ -16,7 +16,7 @@ body {
 #menuButton {
   position: absolute;
   cursor: pointer;
-  padding: 25px;
+  padding: 45px;
 }
 
 #menuIcon {
@@ -29,7 +29,7 @@ body {
 }
 
 #navbar {
-  background-color: #fff9f0aa;
+  background-color: #FFF9F0;
   padding-left: 100px;
 }
 
@@ -40,7 +40,7 @@ body {
 
 #navbar li {
   float: left;
-  padding: 25px;
+  padding: 45px;
   color: black;
 }
 #navbar li:hover {
@@ -48,12 +48,11 @@ body {
   text-decoration: underline;
 }
 #navbar li:active {
-  color: #f0794d;
   text-decoration: underline;
 }
 #navbar li#currPage {
-  font-weight: bolder;
   background-color: #fff9f0;
+  text-decoration: underline;
 }
 #navbar li#logout {
   float: right;
