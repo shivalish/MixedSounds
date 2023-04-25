@@ -29,22 +29,68 @@
   opacity: 50%;
 }
 
-.title {
+.marquee {
   position: absolute;
-  display: flex; 
-  justify-content: center; 
-  align-items: center;
-  transform: translate(-50%, 60%);
-  top: 70%;
-  left: 50%;
-  width: 100%;
-  font-size: 40px;
+  align-self: center;
+  width: 800px;
+  max-width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+}
+.marquee::before, .marquee::after {
+  position: absolute;
+  top: 0;
+  width: 50px;
+  height: 100%;
+  z-index: 1;
+  content: "";
+  pointer-events: none;
+}
+.marquee::before {
+  left: 0;
+  background: linear-gradient(to right, #FFFBF6 0%, transparent 100%);
+}
+.marquee::after {
+  right: 0;
+  background: linear-gradient(to left, #FFFBF6 0%, transparent 100%);
+}
+.marqueeText {
+  position: relative;
+  text-align: center;
+  width: fit-content;
+  min-width: calc(100% - 100px);
+  white-space: nowrap;
+  animation: marquee 8s linear infinite alternate;
+  transform: translateX(50px);
+}
+.marqueeText:hover {
+  animation-play-state: paused;
+}
+@keyframes marquee {
+  0% {
+    transform: translateX(50px);
+  }
+  15% {
+    transform: translateX(50px);
+  }
+  95% {
+    transform: translateX(calc(-100% + min(calc(800px - 50px), calc(100% + 50px))));
+  }
+  100% {
+    transform: translateX(calc(-100% + min(calc(800px - 50px), calc(100% + 50px))));
+  }
 }
 
-.artist {
-  position: absolute;
-  transform: translate(-50%, 15%);
+#title {
+  top: 75%;
+}
+#title div {
+  font-size: 50px;
+}
+
+#artist {
   top: 85%;
-  left: 50%;
-  font-size: 20px;
+}
+#artist div {
+  font-size: 30px;
 }
