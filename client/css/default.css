@@ -75,3 +75,14 @@ body {
 #navbar li#logout {
   float: right;
 }
+
+#pageTitle {
+  margin: auto;
+  padding: 20px;
+  text-align: center;
+  font-size: 100px;
+  font-weight: 600;
+  font-style: italic;
+  color: #fffbf6;
+  -webkit-text-stroke: 1px darkcyan;
+}
