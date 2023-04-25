@@ -1,31 +1,30 @@
 .album {
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -55%);
-  max-width: 50%;
-  max-height: 50%;
+  top: 50vh;
+  left: 50vw;
+  transform: translate(-50%, -50%);
+  max-width: 50vw;
+  max-height: 50vh;
 }
 
-#middle-left-button {
+.btn {
   position: absolute;
-  left: 25%;
-  top: 40%;
-  transform: translateX(50%);
+  top: 50vh;
+  left: 50vw;
 }
-
-#middle-right-button {
-  position: absolute;
-  right: 25%;
-  top: 40%;
-  transform: translateX(-50%);
+.btn img {
+  width: 100px;
+  height: 100px;
 }
-
+#prev-button {
+  transform: translate(calc(calc(-1 * min(25vw, 25vh)) - 100%), -50%);
+}
+#next-button {
+  transform: translate(min(25vw, 25vh), -50%);
+}
 #play-button {
-  position: absolute;
-  transform: translate(-50%, -65%);
-  top: 50%;
-  left: 50%;
+  left: 50vw;
+  transform: translate(-50%, -50%);
   opacity: 50%;
 }
 
@@ -33,7 +32,7 @@
   position: absolute;
   align-self: center;
   width: 800px;
-  max-width: 100%;
+  max-width: 100vw;
   white-space: nowrap;
   overflow: hidden;
 }
@@ -48,11 +47,11 @@
 }
 .marquee::before {
   left: 0;
-  background: linear-gradient(to right, #FFFBF6 0%, transparent 100%);
+  background: linear-gradient(to right, #fffbf6 0%, transparent 100%);
 }
 .marquee::after {
   right: 0;
-  background: linear-gradient(to left, #FFFBF6 0%, transparent 100%);
+  background: linear-gradient(to left, #fffbf6 0%, transparent 100%);
 }
 .marqueeText {
   position: relative;
@@ -74,10 +73,10 @@
     transform: translateX(50px);
   }
   95% {
-    transform: translateX(calc(-100% + min(calc(800px - 50px), calc(100% + 50px))));
+    transform: translateX(calc(-100% + calc(min(800px, 100vw) - 50px)));
   }
   100% {
-    transform: translateX(calc(-100% + min(calc(800px - 50px), calc(100% + 50px))));
+    transform: translateX(calc(-100% + calc(min(800px, 100vw) - 50px)));
   }
 }
 
