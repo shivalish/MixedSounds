@@ -29,7 +29,7 @@ body {
 }
 
 #navbar {
-  background-color: #fff9f0aa;
+  background-color: #FFFBF6AA;
   padding-left: 100px;
 }
 
@@ -53,7 +53,7 @@ body {
 }
 #navbar li#currPage {
   font-weight: bolder;
-  background-color: #fff9f0;
+  background-color: #FFFBF6;
 }
 #navbar li#logout {
   float: right;
