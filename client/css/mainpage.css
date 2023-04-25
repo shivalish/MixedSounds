@@ -1,6 +1,6 @@
 .album {
   position: absolute;
-  top: 50vh;
+  top: 40vh;
   left: 50vw;
   transform: translate(-50%, -50%);
   max-width: 50vw;
@@ -9,7 +9,7 @@
 
 .btn {
   position: absolute;
-  top: 50vh;
+  top: 40vh;
   left: 50vw;
 }
 .btn img {
@@ -81,14 +81,16 @@
 }
 
 #title {
-  top: 75%;
+  top: 70vh;
 }
 #title div {
   font-size: 50px;
+  font-weight: 600;
+  font-style: italic;
 }
 
 #artist {
-  top: 85%;
+  top: 82vh;
 }
 #artist div {
   font-size: 30px;
