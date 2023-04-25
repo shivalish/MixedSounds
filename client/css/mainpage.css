@@ -33,6 +33,8 @@
   align-self: center;
   width: 800px;
   max-width: 100vw;
+  background-color: #fffbf6;
+  border-radius: 15px;
   white-space: nowrap;
   overflow: hidden;
 }
@@ -53,7 +55,7 @@
   right: 0;
   background: linear-gradient(to left, #fffbf6 0%, transparent 100%);
 }
-.marqueeText {
+.marquee div {
   position: relative;
   text-align: center;
   width: fit-content;
@@ -62,7 +64,7 @@
   animation: marquee 8s linear infinite alternate;
   transform: translateX(50px);
 }
-.marqueeText:hover {
+.marquee div:hover {
   animation-play-state: paused;
 }
 @keyframes marquee {
@@ -80,18 +82,14 @@
   }
 }
 
-#title {
+#songInfo {
   top: 70vh;
 }
-#title div {
+#title {
   font-size: 50px;
   font-weight: 600;
   font-style: italic;
 }
-
 #artist {
-  top: 82vh;
-}
-#artist div {
   font-size: 30px;
 }
