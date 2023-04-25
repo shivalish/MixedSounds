@@ -76,6 +76,7 @@ body {
 }
 #navbar li#currPage {
   background-color: #fffbf6;
+  text-decoration: underline;
 }
 #navbar li#logout {
   float: right;
