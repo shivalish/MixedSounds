@@ -8,6 +8,8 @@
     <link rel="icon" type="image/x-icon" href="../favicon.ico">
 
     <!-- font imports -->
+    <link rel="stylesheet" href="css/default.css">
+    <link rel="stylesheet" href="css/playlists.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
@@ -23,7 +25,6 @@
     <div id="menuButton">
       <img id="menuIcon" src="images/hamburgerIconDark.png" />
     </div>
-
     <div id="navbar">
       <ul>
         <a href="mainpage.html"><li>Home</li></a>
@@ -33,6 +34,21 @@
       </ul>
     </div>
 
+    <div class="play-container">
+        <div class="col-md-3">
+          <button id="playlist1" class="btn btn-outline-dark btn-lg btn-square">Country</button>
+          <!-- <div class="title">Country</div> -->
+        </div>
+        <div class="col-md-3">
+          <button id="playlist2" class="btn btn-outline-dark btn-lg btn-square">Rap</button>
+          <!-- <div class="title">Rap</div> -->
+        </div>
+        <div class="col-md-3">
+          <button id="new-playlist" class="btn btn-outline-dark btn-lg btn-square">New Playlist</button>
+          <!-- <div class="title">New Playlist</div> -->
+        </div>
+    </div>
+    
     <h1 id="pageTitle">Playlists</h1>
 
     <script type="module" src="js/menu.js"></script>
