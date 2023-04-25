@@ -1,11 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
 body {
   margin: 0;
-  background-size: cover;
-  background-position: center;
+  background-color: #FFFBF6;
+  background-position: top center;
+  background-size: 100%;
+  background-repeat: no-repeat;
   background-image: url('../images/appBackground.png');
   min-height: 100vh;
-  display:flex;
-  flex-direction:column;
+  display: flex;
+  flex-direction: column;
 }
 
 *{
@@ -13,17 +17,22 @@ body {
   font-size: 20px;
 }
 
+.invisible {
+  display: none;
+}
+.visible {
+  display: inline;
+}
+
 #menuButton {
   position: absolute;
   cursor: pointer;
   padding: 25px;
 }
-
 #menuIcon {
   height: 25px;
   width: 50px;
 }
-
 #menuIcon:active {
   opacity: 0.5;
 }
@@ -32,12 +41,10 @@ body {
   background-color: #FFFBF6AA;
   padding-left: 100px;
 }
-
 #navbar ul {
   display: inline;
   list-style: none;
 }
-
 #navbar li {
   float: left;
   padding: 25px;
@@ -58,13 +65,3 @@ body {
 #navbar li#logout {
   float: right;
 }
-
-.invisible {
-  display: none;
-}
-
-.visible {
-  display: inline;
-}
-
-
