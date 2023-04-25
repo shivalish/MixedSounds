@@ -57,7 +57,7 @@ body {
 
 .btn-default {
     background-color: #ED5A24 !important;
-    color: #FFFBF6 !important;
+    color: #fffbf6 !important;
     border-radius: 25px !important;
     width: 125px;
 }
@@ -68,7 +68,7 @@ body {
 
 input {
     border-radius: 25px;
-    background-color: #FFFBF6;
+    background-color: #fffbf6;
     border-width:0.03cm;
     border-color: black;
     width: 250px;
