@@ -20,33 +20,115 @@
     
   </head>
   <body>
-    
-    <div id="menuButton">
-      <img id="menuIcon" src="images/hamburgerIconLight.png" />
+
+  <!--background image-->
+  <div class="bg">
+
+    <!--navbar-->
+    <div class="navbarcontainer">
+      <div id="menuButton">
+        <img id="menuIcon" src="images/hamburgerIconDark.png" />
+      </div>
+      <div id="navbar">
+        <ul>
+          <a href="mainpage.html"><li id="currPage">Home</li></a>
+          <a href="listeninghistory.html"><li>Listening History</li></a>
+          <a href="playlists.html"><li>Playlists</li></a>
+          <a href="index.html"><li id="logout">Log out</li></a>
+        </ul>
+      </div> 
     </div>
 
-    <div id="navbar" class="invisible">
-      <ul>
-        <a href="mainpage.html"><li id="currPage">Home</li></a>
-        <a href="listeninghistory.html"><li>Listening History</li></a>
-        <a href="playlists.html"><li>Playlists</li></a>
-        <a href="index.html"><li id="logout">Log out</li></a>
-      </ul>
-    </div>
-    
-    <button class="btn btn-lg" id="prev-button"><img src="images/caret-left.svg"></button>
-    <button class="btn btn-lg" id="next-button"><img src="images/caret-right.svg"></button>
-    <div class="container">    
-        <img src="images/Metro-Boomin.webp" class="img-thumbnail album">
-        <button class="btn btn-lg" id="play-button"><img src="images/play-fill.svg"></button>
+    <!--album-->
+    <div class="container">
+        <div><button class="btn btn-lg"><img id="skip-button" src="images/skipbutton_back.png"></button></div>
+        <div><img src="images/Metro-Boomin.webp" class="album"></div>
+      <div><button class="btn btn-lg"><img id="skip-button" src="images/skipbutton.png"></button></div>
     </div>
 
-    <div class="marquee" id="songInfo">
-      <div id="title">Trance (with Travis Scott & Young Thug) from Heroes & Villains</div>
-      <div id="artist">Metro Boomin, Travis Scott, Young Thug</div>
+    <!--Song info with title and artist-->
+    <div class="container">
+      <div class="marquee">
+        <div class="title">Trance (with Travis Scott & Young Thug) from Heroes & Villains</div>
+      </div>
+    </div>
+    <div class="container">
+      <div class="artist">Metro Boomin, Travis Scott, Young Thug</div>
     </div>
 
+  </div>
+
+  <!--Music play tools-->
+  <div class="container" id="container-bg">
+    <div id="music-icon">
+      <img class="icon" src="./images/replaybutton.png">
+      <label>Replay</label>
+    </div>
+
+    <div id="music-icon">
+      <img class="icon" src="./images/volumeicon.png">
+      <label>Volume</label>
+    </div>
+
+    <div id="music-icon">
+      <img class="icon" src="./images/addicon.png">
+      <label>Add to playlist</label>
+    </div>
+
+    <div class="dropdown">
+      <button class="dropbtn">
+        <div id="selectedgenre">Genre</div>
+        <div id="arrow"></div>
+      </button>
+      <div id="genres" class="dropdown-content">
+        <a class="genre">Random</a>
+        <a class="genre">Pop</a>
+        <a class="genre">Rap</a>
+        <a class="genre">Country</a>
+        <a class="genre">Rock</a>
+      </div>
+    </div>
+
+  </div>
+
+  <!--Rating-->
+  <div class="container" id="container-bg">
+      <div class="sub-title">What did you think?</div>
+  </div>
+
+  <div class="container" id="container-bg">
+    <div>
+      <img id="1star" class="smileyface" title="what was that" src="./images/1star.png">
+    </div>
+    <div>
+        <img id="2star" class="smileyface" title="not a fan" src="./images/2star.png">
+    </div>
+    <div>
+        <img id="3star" class="smileyface" title="not bad not bad" src="./images/3star.png"> 
+    </div>
+    <div>
+      <img id="4star" class="smileyface" title="lovely song" src="./images/4star.png">
+    </div>
+    <div>
+      <img id="5star" class="smileyface" title="OBSESSED" src="./images/5star.png">
+    </div>
+  </div>
+
+  <!--comments-->
+  <div class="container" id="container-bg">
+    <div>
+      <label style="text-indent: 10px">Comments (optional)</label>
+      <br>
+      <textarea type="text"></textarea>
+    </div>
+  </div>
+
+  <!--submit-->
+  <div class="container" id="container-bg">
+    <button id="submit" class="btn btn-default" type="submit">Submit</button>
+  </div>
     
     <script type="module" src="js/menu.js"></script>
+    <script type="module" src="js/main.js"></script>
   </body>
 </html>
