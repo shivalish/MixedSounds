@@ -25,35 +25,17 @@
   text-align: right;
 }
 
-/* .title2 {
-    position: absolute;
-    top: 50%;
-    left: 100%;
-    transform: translateY(-50%);
-}
-
-.title3 {
-    position: absolute;
-    top: 50%;
-    left: 100%;
-    transform: translateY(-50%);
-} */
-
 #playlist1 {
     background-color: aqua;
     text-align: right;
-    /* text-indent: 50%; */
 }
 
 #playlist2 {
     background-color: crimson;
     text-align: right;
-    /* text-indent: 50%; */
 }
 
 #new-playlist {
-    /* outline: 5cm;
-    text-indent: 50%; */
     text-align: right;
 }
 
@@ -64,4 +46,19 @@
 
 .col-md-3 {
     padding-top: 20%;
+}
+
+#songs {
+    display: flex;
+    flex-direction: column;
+    justify-content: right;
+    transform: translate(65%,250%);
+    align-items: right;
+    /* display: block; */
+    overflow:auto;
+    float: right;
+}
+
+.play-song:hover {
+    opacity: 50%;
 }
