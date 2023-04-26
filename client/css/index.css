@@ -55,9 +55,20 @@ body {
     font-size: 20px;
 }
 
+.btn-default {
+    background-color: #ED5A24 !important;
+    color: #fffbf6 !important;
+    border-radius: 25px !important;
+    width: 125px;
+}
+
+.btn-default:hover {
+    background-color: #D6450F !important;
+}
+
 input {
     border-radius: 25px;
-    background-color: #FFFBF6;
+    background-color: #fffbf6;
     border-width:0.03cm;
     border-color: black;
     width: 250px;
