@@ -75,3 +75,7 @@
     width: 200px;
     height: auto;
 }
+
+.extra-buttons:hover {
+    opacity: 50%;
+}
