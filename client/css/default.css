@@ -43,7 +43,6 @@ body {
   cursor: pointer;
   padding: 45px;
   z-index: 11;
-  padding: 25px;
 }
 #menuIcon {
   height: 25px;
@@ -66,8 +65,7 @@ body {
 }
 #navbar li {
   float: left;
-  padding: 25px;
-  /*padding: 45px;*/
+  padding: 45px;
   color: black;
 }
 #navbar li:hover {
