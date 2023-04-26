@@ -1,10 +1,11 @@
-.container {
+.flexContainer {    /* class name 'container' conflicts w/Bootstrap */
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
   min-width: 100vw;
-  padding: 10px;
+  padding-top: 10px;
+  padding-bottom: 10px;
 }
 
 .album {
@@ -54,7 +55,7 @@
 .music-icon {
   padding: 30px;
   margin-left: 10px;
-  margin-right: 10px;;
+  margin-right: 10px;
 }
 
 /* Style The Dropdown Button */
@@ -122,8 +123,7 @@
 }
 
 .marquee {
-  min-width: 100vw;
-  border-radius: 15px;
+  width: 100%;
   white-space: nowrap;
   overflow: hidden;
 }
