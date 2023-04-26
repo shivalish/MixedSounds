@@ -42,9 +42,10 @@
   margin-right: 15px;
   margin-left: 15px;
   margin-bottom: 15px;
+  cursor: pointer;
 }
 
-.smileyface:hover, .icon:hover {
+.icon:hover {
   opacity: 70%;
   cursor: pointer;
 }
