@@ -77,15 +77,15 @@
 
     <div class="dropdown">
       <button class="dropbtn">
-        <div>Genre</div>
+        <div id="selectedgenre">Genre</div>
         <div id="arrow"></div>
       </button>
-      <div class="dropdown-content">
-        <a href="#">Random</a>
-        <a href="#">Pop</a>
-        <a href="#">Rap</a>
-        <a href="#">Country</a>
-        <a href="#">Rock</a>
+      <div id="genres" class="dropdown-content">
+        <a class="genre">Random</a>
+        <a class="genre">Pop</a>
+        <a class="genre">Rap</a>
+        <a class="genre">Country</a>
+        <a class="genre">Rock</a>
       </div>
     </div>
 
@@ -125,7 +125,7 @@
 
   <!--submit-->
   <div class="container" id="container-bg">
-    <button class="btn btn-default" type="submit">Submit</button>
+    <button id="submit" class="btn btn-default" type="submit">Submit</button>
   </div>
     
     <script type="module" src="js/menu.js"></script>
