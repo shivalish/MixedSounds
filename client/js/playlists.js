@@ -12,6 +12,11 @@ async function getSongs() {
 
         document.getElementById("songs").appendChild(div);
     });
+    const div = document.createElement('div');
+    div.className = 'play-song';
+
+    div.innerHTML = `<ul>Add a song</ul>`;
+    document.getElementById("songs").appendChild(div);
   }
 
   document.getElementById("playlist1").addEventListener('click',getSongs);

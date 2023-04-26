@@ -8,14 +8,12 @@
     left: 10%;
     bottom: 10%;
     white-space: nowrap;
-    /* transform: translateX(50%); */
     
 }
 
 .title {
     position: absolute;
     padding-left: 50%;
-    /* padding-bottom: 50%; */
     left: 50%;
 }
 
@@ -27,11 +25,13 @@
 
 #playlist1 {
     background-color: aqua;
+    opacity: 80%;
     text-align: right;
 }
 
 #playlist2 {
     background-color: crimson;
+    opacity: 80%;
     text-align: right;
 }
 
@@ -61,14 +61,21 @@
     max-height: 100vh;
 }
 
-/* .play-song {
-    position: absolute;
-    justify-content: right;
-    display: flex;
-    transform: translate(325%,550%);
-    align-items: right;
-} */
-
 .play-song:hover {
+    opacity: 50%;
+}
+
+#buttons {
+    position: absolute;
+    top: 40%;
+    right: 20%;
+}
+
+#custom-Range {
+    width: 200px;
+    height: auto;
+}
+
+.extra-buttons:hover {
     opacity: 50%;
 }
