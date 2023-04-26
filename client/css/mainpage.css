@@ -37,8 +37,8 @@
 }
 
 .smileyface {
-  height: 75px;
-  width: 75px;
+  height: 70px;
+  width: 70px;
   margin-right: 15px;
   margin-left: 15px;
   margin-bottom: 15px;
@@ -184,3 +184,4 @@
   100% {
     transform: translateX(calc(-100% + calc(min(800px, 100vw) - 50px)));
   }
+}
