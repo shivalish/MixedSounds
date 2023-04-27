@@ -1,14 +1,9 @@
-:root {
-  --off-white-bg: #fff9f0;
-  --dark-border: #2e4441;
-}
-
 h1, h2, h3, h4, h5, h6 {
   font-weight: 600;
 }
 
 .songEntry {
-  background-color: var(--off-white-bg);
+  background-color: #FFFBF6dd;
   margin: auto;
   margin-bottom: 30px;
   width: 1000px;
@@ -16,7 +11,7 @@ h1, h2, h3, h4, h5, h6 {
   border-style: solid;
   border-radius: 20px;
   border-width: 2px;
-  border-color: var(--dark-border);
+  border-color: #6C8E8E;
   text-align: center;
 
   display: grid;

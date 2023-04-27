@@ -45,7 +45,7 @@ const submitRating = () => {
 }
 
 const selectGenre = (event) => {
-    document.getElementById("selectedgenre").innerHTML = event.target.innerHTML;
+    document.getElementById("selectedGenre").innerHTML = event.target.innerHTML;
 }
 
 const initializeRatingSelection = () => {
