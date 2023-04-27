@@ -55,6 +55,12 @@ body {
   opacity: 0.5;
 }
 
+.navbarcontainer {
+  height: 120px;
+  width: 100vw;
+  display: flex;
+}
+
 #navbar {
   background-color: #FFFBF6dd;
   padding-left: 140px;    /* TODO: change this to be based on menu icon size */
@@ -97,12 +103,6 @@ body {
   -webkit-text-stroke: 1px #6C8E8E;
 }
 
-.navbarcontainer {
-  height: 120px;
-  width: 100vw;
-  display: flex;
-}
-
 .btn-default {
   background-color: #ED5A24 !important;
   color: #FFFBF6 !important;
@@ -112,20 +112,6 @@ body {
 
 .btn-default:hover {
   background-color: #D6450F !important;
-}
-
-.title {
-  display: flex; 
-  justify-content: center;
-  font-size: 50px;
-  padding: 10px;
-}
-
-.sub-title {
-  display: flex; 
-  justify-content: center; 
-  font-size: 40px;
-  padding: 20px;
 }
 
 input {

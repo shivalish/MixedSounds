@@ -27,6 +27,11 @@
   opacity: 50%;
 }
 
+.title {
+  display: flex;
+  justify-content: center;
+  font-size: 50px;
+}
 .artist {
   display: flex;
   justify-content: center;
@@ -120,6 +125,13 @@
   height: 10px;
   transform: rotate(45deg) translateY(-50%);
   transform-origin: right;
+}
+
+.sub-title {
+  display: flex;
+  justify-content: center;
+  font-size: 40px;
+  padding: 20px;
 }
 
 .marquee {
