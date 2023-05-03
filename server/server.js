@@ -22,10 +22,6 @@ app.use("/home", home);
 app.use("/history", history);
 app.use("/playlists", playlists);
 
-app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, '../client'));
-});
-
 app.listen(port, () => {
     console.log(`Hello we are on port: ${port}`);
 });
