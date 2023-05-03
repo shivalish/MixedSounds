@@ -15,12 +15,10 @@ router.get('/', (req, res) => {
 });
 
 //get - loads history
-router.get("/", async (req, res) => {
+router.get("/:user_id", async (req, res) => {
     let collection = db.collection("history");
-    let results = await collection.find({user_id: req.user_id })
-      .toArray();
-  
-    res.send(results).status(200);
-  });
+    let results = await collection.find({user_id: req.user_id }).toArray();
+    res.json(results).status(200);
+});
 
 export default router;
