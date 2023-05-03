@@ -37,7 +37,7 @@ router.post("/addplaylist", async (req, res) => {
 router.delete("/:id", async (req, res) => {
     const query = { _id: ObjectId(req.params.id) };
   
-    const collection = db.collection("playlistss");
+    const collection = db.collection("playlists");
     let result = await collection.deleteOne(query);
   
     res.send(result).status(200);
