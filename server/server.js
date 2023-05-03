@@ -13,18 +13,18 @@ const port = 3000;
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
-app.use(express.static(path.join(__dirname, '../client')));
-app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, '../client'));
-});
-
 app.use(cors());
 app.use(express.json());
 
 // Load the routes
+app.use(express.static(path.join(__dirname, '../client')));
 app.use("/home", home);
 app.use("/history", history);
 app.use("/playlists", playlists);
+
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, '../client'));
+});
 
 app.listen(port, () => {
     console.log(`Hello we are on port: ${port}`);
