@@ -1,8 +1,11 @@
-const { MongoClient, ServerApiVersion } = require('mongodb');
+import { MongoClient, ServerApiVersion } from "mongodb"
+import * as env from 'dotenv'
 
-const env = require('dotenv');
+//const env = require('dotenv');
 
-env.config({path:'../.env'});
+env.config();
+
+console.log(process.env.DATABASE_URL)
 
 const client = new MongoClient(process.env.DATABASE_URL, {
     serverApi: {
