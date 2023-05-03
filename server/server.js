@@ -7,19 +7,15 @@ import { fileURLToPath } from 'url';
 import { dirname } from 'path';
 import cors from "cors";
 
-// here for expressjs will add more in later
-//const express = require("express");
 const app = express();
 const port = 3000;
-//path = require('path');
 
 const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(dirname(__filename));
+const __dirname = dirname(__filename);
 
 app.use(express.static(path.join(__dirname, '../client')));
-app.use(express.static(path.join(__dirname, '..')));
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, '../client/index.html'));
+    res.sendFile(path.join(__dirname, '../client'));
 });
 
 app.use(cors());
