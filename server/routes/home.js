@@ -15,6 +15,7 @@ router.get('/', (req, res) => {
 });
 
 //post - submit button
+//DOES NOT CHECK WHETHER IT HAS BEEN MADE YET
 router.post("/submit/:id", async(req, res) => {
 
   let query = { _id: new ObjectId(req.params.id) };
