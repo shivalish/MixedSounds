@@ -15,14 +15,14 @@ router.get('/', (req, res) => {
 });
 
 //get - load playlists
-router.get("/", async (req, res) => {
+router.get("/:id", async (req, res) => {
     let collection = db.collection("playlists");
-    let results = await collection.find({user_id: req.user_id })
-      .toArray();
+    let results = await collection.findOne({_id: new ObjectId(req.params.id)});
   
     res.send(results).status(200);
   });
 
+  /*
 //post - create playlist
 router.post("/addplaylist", async (req, res) => {
     let collection = db.collection("playlists");
@@ -42,5 +42,6 @@ router.delete("/:id", async (req, res) => {
   
     res.send(result).status(200);
   });
+  */
 
 export default router;
