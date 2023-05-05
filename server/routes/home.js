@@ -15,13 +15,27 @@ router.get('/', (req, res) => {
 });
 
 //post - submit button
-router.post("/submit", async (req, res) => {
-    let collection = db.collection("history");
-    let newDocument = req.body;
-    newDocument.date = new Date();
-    let result = await collection.insertOne(newDocument);
-    res.send(result).status(204);
-  });
+router.post("/submit/:id", async(req, res) => {
+
+  let query = { _id: new ObjectId(req.params.id) };
+
+  let collection = db.collection("history");
+
+  let arr = await collection.findOne(query);
+
+  let songs = arr.songs;
+
+  songs.push(req.body);
+
+  const updates = {
+    $set: { songs: songs }
+  };
+
+  let result = await collection.updateOne(query, updates);
+
+  res.send(result).status(204)
+
+});
 
 //post - song to playlist
 

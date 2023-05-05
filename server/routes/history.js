@@ -14,11 +14,16 @@ router.get('/', (req, res) => {
   res.sendFile('client/listeninghistory.html', { root: dirname(__dirname) })
 });
 
-//get - loads history
-router.get("/:user_id", async (req, res) => {
-    let collection = db.collection("history");
-    let results = await collection.find({user_id: req.user_id }).toArray();
-    res.json(results).status(200);
+//get - fetches listening history
+router.get("/:id", async (req, res) => {
+
+  let collection = db.collection("history");
+
+  let arr = await collection.findOne({ _id: new ObjectId(req.params.id) });
+
+  if (!arr) res.send("Not found").status(404);
+  else res.send(arr).status(200);
+
 });
 
 export default router;
