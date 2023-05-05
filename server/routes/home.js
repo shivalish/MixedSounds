@@ -34,7 +34,7 @@ router.post("/submit/:id", async(req, res) => {
 
   let result = await collection.updateOne(query, updates);
 
-  res.send(result).status(204)
+  res.send(result).status(204);
 
 });
 
