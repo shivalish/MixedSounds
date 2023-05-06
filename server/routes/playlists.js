@@ -15,29 +15,29 @@ router.get('/', (req, res) => {
 });
 
 //get - load playlists
-router.get("/:id", async (req, res) => {
+router.get("/:name/:id", async (req, res) => {
     let collection = db.collection("playlists");
     let results = await collection.findOne({_id: new ObjectId(req.params.id)});
   
-    res.send(results).status(200);
+    res.send(results[req.params.name]).status(200);
   });
 
-
 //post - create playlist
-router.post("/addplaylist/:name/:id", async (req, res) => {
+router.post("/addplaylist/:username/:id/:name", async (req, res) => {
+
+  let username = req.params.username;
+  let playlistname = req.params.name;
 
   let query = { _id: new ObjectId(req.params.id) };
 
   let collection = db.collection("playlists");
 
-  let arr = await collection.findOne(query);
+  let playlists = await collection.findOne(query);
 
-  let playlist = {name: req.params.name, songs: []};
-
-  arr.playlists.push(playlist);
+  playlists[username][playlistname] = {};
 
   const updates = {
-    $set: { playlists: arr }
+    $set: { [username] : playlists[username] }
   };
 
   let result = await collection.updateOne(query, updates);
@@ -45,9 +45,54 @@ router.post("/addplaylist/:name/:id", async (req, res) => {
   res.send(result).status(204)
 
   });
-/*
-//post - add song to playlist
 
+//post - add song to playlist
+router.get("/addsong/:username/:id/:name", async (req, res) => {
+
+  let username = req.params.username;
+  let playlistname = req.params.name;
+  let songname = req.body.name;
+  let songinfo = req.body.info;
+
+  let query = { _id: new ObjectId(req.params.id) };
+
+  let collection = db.collection("playlists");
+
+  let playlists = await collection.findOne(query);
+
+  let songs = playlists[username][playlistname];
+
+  songs[songname] = songinfo[songname];
+
+  const updates = {
+    $set: { [username] : playlists[username] }
+  };
+
+  let result = await collection.updateOne(query, updates);
+
+  res.send(songs).status(204)
+
+});
+
+//get playlist
+router.get("/getplaylist/:username/:id/:name", async (req, res) => {
+
+  let username = req.params.username;
+  let playlistname = req.params.name;
+
+  let query = { _id: new ObjectId(req.params.id) };
+
+  let collection = db.collection("playlists");
+
+  let playlists = await collection.findOne(query);
+
+  let songs = playlists[username][playlistname];
+
+  res.send(songs).status(200)
+
+});
+
+/*
 //delete - delete a playlist
 router.delete("/:id", async (req, res) => {
     const query = { _id: ObjectId(req.params.id) };

@@ -16,20 +16,22 @@ router.get('/', (req, res) => {
 
 //post - submit button
 //DOES NOT CHECK WHETHER IT HAS BEEN MADE YET
-router.post("/submit/:id", async(req, res) => {
+router.post("/submit/:name/:id", async(req, res) => {
+
+  let name = req.params.name;
+  let songname = req.body.name;
+  let songinfo = req.body.info;
 
   let query = { _id: new ObjectId(req.params.id) };
 
   let collection = db.collection("history");
 
-  let arr = await collection.findOne(query);
+  let songs = await collection.findOne(query);
 
-  let songs = arr.songs;
-
-  songs.push(req.body);
+  songs[name][songname] = songinfo;
 
   const updates = {
-    $set: { songs: songs }
+    $set: { [name] : songs[name] }
   };
 
   let result = await collection.updateOne(query, updates);
@@ -39,5 +41,39 @@ router.post("/submit/:id", async(req, res) => {
 });
 
 //post - song to playlist
+
+//REWORK
+router.post('addsong/:name/:id', async (req, res) => {
+
+  let query = { _id: new ObjectId(req.params.id) };
+
+  let collection = db.collection("playlists");
+
+  let user = await collection.findOne(query);
+
+  let arr = user.playlists;
+
+  let found = false;
+
+  //find playlist
+  for (let p in arr) {
+
+    if (arr[p].name === req.params.name) {
+      arr[p].songs.push(req.body);
+      found = true;
+      break;
+    }
+
+  }
+
+  const updates = {
+    $set: { playlists: arr }
+  };
+
+  let result = await collection.updateOne(query, updates);
+
+  res.send(result).status(204)
+
+});
 
 export default router;
