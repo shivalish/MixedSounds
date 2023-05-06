@@ -1,0 +1,56 @@
+{
+"user": [
+
+        {
+            "name": "playlist1",
+            "songs" : [
+
+                {
+                        "name" : "Trance (with Travis Scott & Young Thug)",
+                        "artists" : [
+                            "Metro Boomin",
+                            "Travis Scott",
+                            "Young Thug"
+                        ],
+            
+                        "album" : "HEROES & VILLAINS",
+                        "genre" : "hip-hop/rap",
+                        "mp3" : "audio"
+                },
+
+                {
+                        "name" : "Be Happy",
+                        "artists" : [
+                            "Dixie"
+                        ],
+            
+                        "album" : "a letter to me",
+                        "genre" : "pop",
+                        "mp3" : "audio"
+                }
+            ]
+
+        },
+
+        {
+            "name": "playlist1",
+            "songs" : [
+
+                {
+                        "name" : "Trance (with Travis Scott & Young Thug)",
+                        "artists" : [
+                            "Metro Boomin",
+                            "Travis Scott",
+                            "Young Thug"
+                        ],
+            
+                        "album" : "HEROES & VILLAINS",
+                        "genre" : "hip-hop/rap",
+                        "mp3" : "audio"
+                }
+            ]
+
+        }
+
+    ]
+}

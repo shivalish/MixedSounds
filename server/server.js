@@ -1,13 +1,27 @@
-// here for expressjs will add more in later
-const express = require("express");
-const server = express();
+import home from "./routes/home.js";
+import history from "./routes/history.js";
+import playlists from "./routes/playlists.js";
+import express from "express";
+import path from "path";
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
+import cors from "cors";
+
+const app = express();
 const port = 3000;
-path = require('path');
-server.use(express.static(path.join(__dirname, '../client')));
-server.use(express.static(path.join(__dirname, '..')));
-server.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, '../client/index.html'));
-});
-server.listen(port, () => {
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
+app.use(cors());
+app.use(express.json());
+
+// Load the routes
+app.use(express.static(path.join(__dirname, '../client')));
+app.use("/home", home);
+app.use("/history", history);
+app.use("/playlists", playlists);
+
+app.listen(port, () => {
     console.log(`Hello we are on port: ${port}`);
 });
