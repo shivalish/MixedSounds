@@ -24,14 +24,12 @@
 }
 
 #playlist1 {
-    background-color: aqua;
-    opacity: 80%;
+    background-color: #00ffffcc;    /* '...cc' suffix = 80% opacity */
     text-align: right;
 }
 
 #playlist2 {
-    background-color: crimson;
-    opacity: 80%;
+    background-color: #dc143ccc;    /* '...cc' suffix = 80% opacity */
     text-align: right;
 }
 

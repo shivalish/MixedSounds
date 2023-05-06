@@ -1,0 +1,47 @@
+{
+
+        "shivalis": {
+
+            "playlist1" : {
+
+                "Trance (with Travis Scott & Young Thug)" : {
+                    "artists" : [
+                        "Metro Boomin",
+                        "Travis Scott",
+                        "Young Thug"
+                    ],
+        
+                    "album" : "HEROES & VILLAINS",
+                    "genre" : "hip-hop/rap",
+                    "mp3" : "audio"
+                },
+
+                "Be Happy" : {
+                    "artists" : [
+                        "Dixie"
+                    ],
+                
+                    "album" : "a letter to me",
+                    "genre" : "pop",
+                    "mp3" : "audio"
+                }
+
+            },
+
+            "playlist2" : {
+
+                "Trance (with Travis Scott & Young Thug)" : {
+                    "artists" : [
+                        "Metro Boomin",
+                        "Travis Scott",
+                        "Young Thug"
+                    ],
+                
+                    "album" : "HEROES & VILLAINS",
+                    "genre" : "hip-hop/rap",
+                    "mp3" : "audio"
+                }
+            }
+
+        }
+}
