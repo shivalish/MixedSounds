@@ -15,15 +15,21 @@ router.get('/', (req, res) => {
 });
 
 //get - fetches listening history
-router.get("/:id", async (req, res) => {
+router.get("/:username/:id", async (req, res) => {
 
   let collection = db.collection("history");
 
   let arr = await collection.findOne({ _id: new ObjectId(req.params.id) });
 
+  let username = req.params.username;
+
   if (!arr) res.send("Not found").status(404);
-  else res.send(arr).status(200);
+  else res.send(arr[username]).status(200);
 
 });
+
+//change comment
+
+//change rating
 
 export default router;

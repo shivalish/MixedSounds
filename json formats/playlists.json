@@ -1,56 +1,47 @@
 {
-"user": [
 
-        {
-            "name": "playlist1",
-            "songs" : [
+        "shivalis": {
 
-                {
-                        "name" : "Trance (with Travis Scott & Young Thug)",
-                        "artists" : [
-                            "Metro Boomin",
-                            "Travis Scott",
-                            "Young Thug"
-                        ],
-            
-                        "album" : "HEROES & VILLAINS",
-                        "genre" : "hip-hop/rap",
-                        "mp3" : "audio"
+            "playlist1" : {
+
+                "Trance (with Travis Scott & Young Thug)" : {
+                    "artists" : [
+                        "Metro Boomin",
+                        "Travis Scott",
+                        "Young Thug"
+                    ],
+        
+                    "album" : "HEROES & VILLAINS",
+                    "genre" : "hip-hop/rap",
+                    "mp3" : "audio"
                 },
 
-                {
-                        "name" : "Be Happy",
-                        "artists" : [
-                            "Dixie"
-                        ],
-            
-                        "album" : "a letter to me",
-                        "genre" : "pop",
-                        "mp3" : "audio"
+                "Be Happy" : {
+                    "artists" : [
+                        "Dixie"
+                    ],
+                
+                    "album" : "a letter to me",
+                    "genre" : "pop",
+                    "mp3" : "audio"
                 }
-            ]
 
-        },
+            },
 
-        {
-            "name": "playlist1",
-            "songs" : [
+            "playlist2" : {
 
-                {
-                        "name" : "Trance (with Travis Scott & Young Thug)",
-                        "artists" : [
-                            "Metro Boomin",
-                            "Travis Scott",
-                            "Young Thug"
-                        ],
-            
-                        "album" : "HEROES & VILLAINS",
-                        "genre" : "hip-hop/rap",
-                        "mp3" : "audio"
+                "Trance (with Travis Scott & Young Thug)" : {
+                    "artists" : [
+                        "Metro Boomin",
+                        "Travis Scott",
+                        "Young Thug"
+                    ],
+                
+                    "album" : "HEROES & VILLAINS",
+                    "genre" : "hip-hop/rap",
+                    "mp3" : "audio"
                 }
-            ]
+            }
 
         }
-
-    ]
 }
