@@ -47,7 +47,7 @@ router.post("/addplaylist/:username/:id/:name", async (req, res) => {
   });
 
 //post - add song to playlist
-router.get("/addsong/:username/:id/:name", async (req, res) => {
+router.post("/addsong/:username/:id/:name", async (req, res) => {
 
   let username = req.params.username;
   let playlistname = req.params.name;
@@ -62,7 +62,7 @@ router.get("/addsong/:username/:id/:name", async (req, res) => {
 
   let songs = playlists[username][playlistname];
 
-  songs[songname] = songinfo[songname];
+  songs[songname] = songinfo;
 
   const updates = {
     $set: { [username] : playlists[username] }
@@ -92,16 +92,28 @@ router.get("/getplaylist/:username/:id/:name", async (req, res) => {
 
 });
 
-/*
 //delete - delete a playlist
-router.delete("/:id", async (req, res) => {
-    const query = { _id: ObjectId(req.params.id) };
+router.delete("/delete/:username/:id/:name", async (req, res) => {
+
+    let username = req.params.username;
+    let playlistname = req.params.name;
+
+    const query = { _id: new ObjectId(req.params.id) };
   
     const collection = db.collection("playlists");
-    let result = await collection.deleteOne(query);
+
+    let playlists = await collection.findOne(query);
+
+    delete playlists[username][playlistname];
+
+    const updates = {
+      $set: { [username] : playlists[username] }
+    };
+  
+    let result = await collection.updateOne(query, updates);
   
     res.send(result).status(200);
-  });
-  */
+
+});
 
 export default router;
