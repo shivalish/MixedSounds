@@ -1,8 +1,11 @@
 import { Router } from 'express';
-import { check, validationResult } from 'express-validator';
-import * as passport from 'passport'; 
+import { body, check, validationResult } from 'express-validator';
+import passport from 'passport';
 import { Strategy as LocalStrategy } from 'passport-local';
 import * as dbclient from "../db/dbclient.js";
+import router from './home.js';
+
+
 
 
 // import db from '../db/dbclient';
@@ -11,13 +14,13 @@ const authRouter = Router();
 // authRouter.post('/login', passport.authenticate('local'), (req, res) => {
 //     res.send(200);
 // });
-authRouter.post('/register' [
-    check(req.body.username)
+authRouter.post('/register', [
+    body('username')
     .notEmpty()
     .withMessage("username cannot be empty")
     .isLength({min: 5})
     .withMessage("username must be at least 5 characters long"),
-    check(req.body.password)
+    body('password')
     .notEmpty()
     .withMessage("password cannot be empty")
     .isLength({min: 5})
@@ -40,4 +43,4 @@ passport.use(new LocalStrategy(
     ));
 
 
-    export default authRouter;
+    export default router;

@@ -1,12 +1,13 @@
 import home from "./routes/home.js";
 import history from "./routes/history.js";
 import playlists from "./routes/playlists.js";
-import authRoute from "./routes/auth.js";
+import auth from "./routes/auth.js";
 import express from "express";
 import path from "path";
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
 import cors from "cors";
+
 
 const app = express();
 const port = 3000;
@@ -22,7 +23,7 @@ app.use(express.static(path.join(__dirname, '../client')));
 app.use("/home", home);
 app.use("/history", history);
 app.use("/playlists", playlists);
-app.use("/auth", authRoute);
+app.use("/auth", auth);
 
 
 app.listen(port, () => {
