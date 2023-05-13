@@ -1,3 +1,4 @@
+// this currently gets a fake list of songs from a json file and then creates divs for each song and appends them to the page.
 async function getSongs() {
     const response = await fetch('../server/data.json');
     const data = await response.json();

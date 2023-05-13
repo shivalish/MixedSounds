@@ -1,7 +1,7 @@
 .btn-square {
     width: 80px;
     height: 80px;
-  }
+}
 
 .play-container {
     position: absolute;
@@ -18,14 +18,15 @@
 }
 
 .btn {
-  width: 200px;
-  padding-right: 20px;
+  width: 75px;
+  /* padding-right: 20px; */
   text-align: right;
 }
 
 #playlist1 {
     background-color: #00ffffcc;    /* '...cc' suffix = 80% opacity */
     text-align: right;
+
 }
 
 #playlist2 {
@@ -76,4 +77,20 @@
 
 .extra-buttons:hover {
     opacity: 50%;
+}
+
+.extra-buttons {
+    /* left: 0%; */
+    width: 70px; /* Adjust the width of the button */
+    border: none; /* Remove the border around the button */
+    background: none; /* Remove the background color of the button */
+}
+
+.extra-buttons img {
+    width: 25px; /* Adjust the width of the image to make it bigger */
+    height: 25px; /* Adjust the height of the image to make it bigger */
+}
+
+.form-range {
+    padding-right: 65px;
 }
