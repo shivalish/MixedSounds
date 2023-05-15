@@ -14,8 +14,17 @@ router.get('/', (req, res) => {
   res.sendFile('client/playlists.html', { root: dirname(__dirname) })
 });
 
+//REWORK ALL OF THESE
+
 //get - load playlists
 router.get("/:name/:id", async (req, res) => {
+
+  //get objectid for user
+
+  //get playlists
+
+  //return playlists
+
     let collection = db.collection("playlists");
     let results = await collection.findOne({_id: new ObjectId(req.params.id)});
   
@@ -24,6 +33,10 @@ router.get("/:name/:id", async (req, res) => {
 
 //post - create playlist
 router.post("/addplaylist/:username/:id/:name", async (req, res) => {
+
+  //get object id for user
+  //get playlists
+  //add json object {name : req.params.id, songs []} to playlists array
 
   let username = req.params.username;
   let playlistname = req.params.name;
@@ -48,6 +61,10 @@ router.post("/addplaylist/:username/:id/:name", async (req, res) => {
 
 //post - add song to playlist
 router.post("/addsong/:username/:id/:name", async (req, res) => {
+
+  //get object id for user
+  //fetch playlists for user
+  //find playlidt by name
 
   let username = req.params.username;
   let playlistname = req.params.name;
