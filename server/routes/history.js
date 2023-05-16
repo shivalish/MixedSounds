@@ -14,21 +14,45 @@ router.get('/', (req, res) => {
   res.sendFile('client/listeninghistory.html', { root: dirname(__dirname) })
 });
 
-//get - fetches listening history
-router.get("/:username/:id", async (req, res) => {
+//get - fetches listening history and ratings
+router.get("/:id", async (req, res) => {
 
-  let collection = db.collection("history");
+  //get objectid for user
+  //fetch listening history
+  //fetch ratings
+  //send array of json objects with listening history and ratings
 
-  let arr = await collection.findOne({ _id: new ObjectId(req.params.id) });
+  let usercollection = db.collection("userbase");
+  let ratingscollection = db.collection("ratings");
+  let songscollection = db.collection("songs");
+  let historycollection = db.collection("history");
 
-  let username = req.params.username;
+  let user = await usercollection.findOne({ _id: new ObjectId(req.params.id) });
+
+  let history = await historycollection.findOne({ _id: user.history_id });
+
+  let historyarray = history.history;
+
+  let arr = [];
+
+  for (let i = 0; i < historyarray.length; i++) {
+
+    let song = await songscollection.findOne({ _id: historyarray[i].song_id });
+    let rating = await ratingscollection.findOne({ _id: historyarray[i].rating_id });
+
+    let obj = { song: song, rating: rating };
+
+    arr.push(obj);
+
+  }
 
   if (!arr) res.send("Not found").status(404);
-  else res.send(arr[username]).status(200);
+  else res.send(arr).status(200);
 
 });
 
 //change comment
+
 
 //change rating
 
