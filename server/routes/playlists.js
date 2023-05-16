@@ -14,122 +14,175 @@ router.get('/', (req, res) => {
   res.sendFile('client/playlists.html', { root: dirname(__dirname) })
 });
 
-//REWORK ALL OF THESE
-
-//get - load playlists
+//get - load playlist
 router.get("/:name/:id", async (req, res) => {
 
-  //get objectid for user
+  let usercollection = db.collection("userbase");
+  let playlistscollection = db.collection("playlists");
+  let songscollection = db.collection("songs");
 
-  //get playlists
+  let user = await usercollection.findOne({ _id: new ObjectId(req.params.id) });
 
-  //return playlists
+  let playlists = await playlistscollection.findOne({ _id: user.playlists_id });
 
-    let collection = db.collection("playlists");
-    let results = await collection.findOne({_id: new ObjectId(req.params.id)});
+  let arr = playlists.playlists;
+
+  let playlist = {};
+
+  for (let i = 0; i < arr.length; i++) {
+
+    if (arr[i].name == req.params.name) {
+
+      playlist.name = arr[i].name;
+      playlist.songs = [];
   
-    res.send(results[req.params.name]).status(200);
-  });
+      for (let j = 0; j < arr[i].songs.length; j++) {
+  
+        let songinfo = await songscollection.findOne({ _id: arr[i].songs[j] });
+  
+        playlist.songs.push(songinfo);
+      
+      }
 
-//post - create playlist
-router.post("/addplaylist/:username/:id/:name", async (req, res) => {
+      break;
 
-  //get object id for user
-  //get playlists
-  //add json object {name : req.params.id, songs []} to playlists array
+    }
 
-  let username = req.params.username;
-  let playlistname = req.params.name;
-
-  let query = { _id: new ObjectId(req.params.id) };
-
-  let collection = db.collection("playlists");
-
-  let playlists = await collection.findOne(query);
-
-  playlists[username][playlistname] = {};
-
-  const updates = {
-    $set: { [username] : playlists[username] }
-  };
-
-  let result = await collection.updateOne(query, updates);
-
-  res.send(result).status(204)
-
-  });
-
-//post - add song to playlist
-router.post("/addsong/:username/:id/:name", async (req, res) => {
-
-  //get object id for user
-  //fetch playlists for user
-  //find playlidt by name
-
-  let username = req.params.username;
-  let playlistname = req.params.name;
-  let songname = req.body.name;
-  let songinfo = req.body.info;
-
-  let query = { _id: new ObjectId(req.params.id) };
-
-  let collection = db.collection("playlists");
-
-  let playlists = await collection.findOne(query);
-
-  let songs = playlists[username][playlistname];
-
-  songs[songname] = songinfo;
-
-  const updates = {
-    $set: { [username] : playlists[username] }
-  };
-
-  let result = await collection.updateOne(query, updates);
-
-  res.send(songs).status(204)
+  }
+  
+  res.send(playlist).status(200);
 
 });
 
-//get playlist
-router.get("/getplaylist/:username/:id/:name", async (req, res) => {
+//post - create playlist
+router.post("/addplaylist/:name/:id", async (req, res) => {
 
-  let username = req.params.username;
+  let userid = req.params.id;
   let playlistname = req.params.name;
 
-  let query = { _id: new ObjectId(req.params.id) };
+  let usercollection = db.collection("userbase");
+  let playlistscollection = db.collection("playlists");
+  let user = await usercollection.findOne({ _id: new ObjectId(userid) });
 
-  let collection = db.collection("playlists");
+  let query = { _id: user.playlists_id };
 
-  let playlists = await collection.findOne(query);
+  let playlists = await playlistscollection.findOne(query);
 
-  let songs = playlists[username][playlistname];
+  let arr = playlists.playlists;
 
-  res.send(songs).status(200)
+  let newplaylist = {name: playlistname, songs: []};
+
+  arr.push(newplaylist);
+
+  const updates = {
+    $set: { playlists: arr }
+  };
+
+  let result = await playlistscollection.updateOne(query, updates);
+
+  res.send(result).status(204)
+
+});
+
+//post - add song to playlist
+router.post("/addsong/:name/:id", async (req, res) => {
+
+  //repeated code from /home/addsong
+  let songid = req.body.song_id;
+  let userid = req.params.id;
+  let playlistname = req.params.name;
+
+  let usercollection = db.collection("userbase");
+  let playlistscollection = db.collection("playlists");
+  let user = await usercollection.findOne({ _id: new ObjectId(userid) });
+
+  let query = { _id: user.playlists_id };
+
+  let playlists = await playlistscollection.findOne(query);
+
+  let arr = playlists.playlists;
+
+    //find playlist
+    for (let p in arr) {
+
+      if (arr[p].name === playlistname) {
+        arr[p].songs.push(new ObjectId(songid));
+        break;
+      }
+    }
+
+  const updates = {
+    $set: { playlists: arr }
+  };
+
+  let result = await playlistscollection.updateOne(query, updates);
+
+  res.send(result).status(204);
+
+});
+
+//need to have id in req.body for some reason
+//get playlist names
+router.get("/playlistnames", async (req, res) => {
+
+  console.log("I am here");
+
+  let userid = req.body.id;
+
+  let usercollection = db.collection("userbase");
+  let playlistscollection = db.collection("playlists");
+  let user = await usercollection.findOne({ _id: new ObjectId(userid) });
+
+  let playlists = await playlistscollection.findOne({ _id: user.playlists_id });
+
+  let arr = playlists.playlists;
+
+  let names = [];
+
+  for (let i = 0; i < arr.length; i++) {
+    names.push(arr[i].name);
+  }
+
+  let results = {names: [names]};
+
+  if (!results) res.send("Not found").status(404);
+  else res.send(results).status(200);
 
 });
 
 //delete - delete a playlist
-router.delete("/delete/:username/:id/:name", async (req, res) => {
+router.delete("/delete/:name/:id", async (req, res) => {
 
-    let username = req.params.username;
-    let playlistname = req.params.name;
-
-    const query = { _id: new ObjectId(req.params.id) };
+  let playlistname = req.params.name;
+  let userid = req.params.id;
   
-    const collection = db.collection("playlists");
+  let usercollection = db.collection("userbase");
+  let playlistscollection = db.collection("playlists");
+  let user = await usercollection.findOne({ _id: new ObjectId(userid) });
 
-    let playlists = await collection.findOne(query);
+  let query = { _id: user.playlists_id };
 
-    delete playlists[username][playlistname];
+  let playlists = await playlistscollection.findOne(query);
 
-    const updates = {
-      $set: { [username] : playlists[username] }
-    };
-  
-    let result = await collection.updateOne(query, updates);
-  
-    res.send(result).status(200);
+  let arr = playlists.playlists;
+
+  let newarr = [];
+
+  for (let i = 0; i < arr.length; i++) {
+
+    if (arr[i].name !== playlistname) {
+      newarr.push(arr[i]);
+    }
+
+  }
+
+  const updates = {
+    $set: { playlists: newarr }
+  };
+
+  let result = await playlistscollection.updateOne(query, updates);
+
+  res.send(result).status(204);
 
 });
 

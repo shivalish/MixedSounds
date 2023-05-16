@@ -51,8 +51,6 @@ router.get("/:id", async (req, res) => {
 
 });
 
-//REWORK ALL OF THESE
-
 //change comment
 
 
