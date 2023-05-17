@@ -9,11 +9,24 @@ const genres = document.getElementById("genres");
 
 const ratings = [onestar, twostar, threestar, fourstar, fivestar];
 
+//CHANGE THIS to be able to generate random song every time
+const song =
+    {
+        "name": "Trance (with Travis Scott & Young Thug)",
+        "artists": ["Metro Boomin", "Travis Scott", "Young Thug"],
+        "album": "HEROES & VILLAINS",
+        "genre": "hip-hop/rap"
+    };
+
+let rating = 0;
+
 const selectRating = (event) => {
 
     console.log(window.getComputedStyle(event.currentTarget).getPropertyValue("opacity"));
 
     if (ratingsclicked(event.target)) {
+
+        rating = 0;
 
         for (let i = 0; i < ratings.length; i++) {
             const smileyface = ratings[i];
@@ -28,6 +41,8 @@ const selectRating = (event) => {
                 smileyface.style.opacity = "50%";
             } else {
                 smileyface.style.opacity = "100%";
+                rating = i + 1;
+                console.log(rating);
             }
         }
     }
@@ -38,10 +53,6 @@ const ratingsclicked = (target) => {
     ratings.forEach( (x) => { clicked = x === target ? clicked : x.style.opacity == 0.5; });
     console.log(clicked);
     return clicked;
-}
-
-const submitRating = () => {
-    alert("submitted rating");
 }
 
 const selectGenre = (event) => {
@@ -65,6 +76,41 @@ const initializeGenreSelection = () => {
     for (let i = 0; i < genre.length; i++) {
         genre[i].addEventListener("click", selectGenre);
     }
+}
+
+const submitRating = async () => {
+
+    if (rating == 0) {
+        alert("select a rating!");
+    } else {
+
+        const comment = document.getElementById("comment").value;
+
+        //change to get user id
+        const response = await fetch(`/home/submit/645a71afc005c22333f55a1b`, {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                "song": song,
+                "rating": {
+                    "rating": rating,
+                    "comment": comment
+                }
+            })
+        })
+
+        const stat = response.status;
+
+        if (stat !== 400) {
+            alert("submitted rating");
+        } else {
+            alert("woops it didn't work");
+        }
+
+    }
+
 }
 
 initializeRatingSelection();

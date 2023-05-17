@@ -1,44 +1,27 @@
 const historycontainer = document.getElementById("historyContainer");
 
-const render = () => {
+const render = async () => {
 
     //change this
-    //const data = await fetch ("http://localhost:3000/history/645a71afc005c22333f55a1b");
-
-    const data = [
-        {
-            "song": {
-                "_id": "645e8e9bc8e960d164c0d322",
-                "name": "Be Happy",
-                "artists": [
-                    "Dixie"
-                ],
-                "album": "a letter to me",
-                "genre": "pop"
-            },
-            "rating": {
-                "_id": "645e8e9bc8e960d164c0d322",
-                "rating": "3",
-                "comment": "Be Happy was ok."
-            }
-        },
-        {
-            "song": {
-                "_id": "645ef8d707b58d720c854aea",
-                "name": "Mrs. Clean",
-                "artists": [
-                    "Amine"
-                ],
-                "album": "Limbo (Deluxe)",
-                "genre": "rap"
-            },
-            "rating": {
-                "_id": "645ef8d707b58d720c854aeb",
-                "rating": 5,
-                "comment": "Mrs. Clean is a great song"
-            }
+    const res = await fetch('/history/645a71afc005c22333f55a1b', {
+        method: "GET",
+        headers: {
+            'Content-Type': 'application/json',
         }
-    ];
+    });
+
+    const data = await res.json();
+    const status = res.status;
+
+    if (status === 200) {
+        renderlisteninghistory(data);
+    } else {
+        alert("error listening history not found");
+    }
+
+}
+
+const renderlisteninghistory = (data) => {
 
     for (let i = 0; i < data.length; i++) {
 
@@ -76,10 +59,7 @@ const render = () => {
         songEntry.appendChild(ratingdiv(data[i].rating.rating));
         songEntry.appendChild(comment(data[i].rating.comment));
 
-        historycontainer.appendChild(songEntry);
-
-        console.log(songEntry.innerHTML)
-
+        historycontainer.appendChild(songEntry);   
     }
 
 }

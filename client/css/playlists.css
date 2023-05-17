@@ -1,15 +1,49 @@
-.btn-square {
-    width: 80px;
-    height: 80px;
+.gridContainer {    /* class name 'container' conflicts w/Bootstrap */
+    min-width: 100vw;
+    height: 100vh;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
 }
 
-.play-container {
-    position: absolute;
-    left: 10%;
-    bottom: 10%;
-    white-space: nowrap;
-    
-}
+.square {
+    min-height: 50px;
+    min-width: 50px;
+    border: 1px;
+    border-color: black;
+    border-style: solid;
+  }
+
+  .playlists {
+    display: grid;
+    grid-template-columns: auto 1fr;
+
+    margin-top: 150px;
+
+    grid-row-start: 1;
+    grid-row-end: 3;
+  }
+
+  .playlistinfo {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .playlistinfo > div {
+    display: flex;
+    flex-direction: row;
+  }
+
+  .col-1 {
+    grid-column-start: 1;
+    grid-column-end: 2;
+    margin-left: 75px;
+  }
+
+  .col-2 {
+    grid-column-start: 2;
+    grid-column-end: 3;
+    margin-left: 20px;
+  }
 
 .title {
     position: absolute;
@@ -17,80 +51,18 @@
     left: 50%;
 }
 
-.btn {
-  width: 75px;
-  /* padding-right: 20px; */
-  text-align: right;
+.playlist-title {
+    font-size: 70px;
+    color: #2E4441;
 }
 
-#playlist1 {
-    background-color: #00ffffcc;    /* '...cc' suffix = 80% opacity */
-    text-align: right;
-
+.music-icon {
+    padding: 30px;
+    margin-left: 10px;
+    margin-right: 10px;
 }
 
-#playlist2 {
-    background-color: #dc143ccc;    /* '...cc' suffix = 80% opacity */
-    text-align: right;
-}
-
-#new-playlist {
-    text-align: right;
-}
-
-#plus {
-    max-width: 100%;
-    max-height: 100%;
-}
-
-.col-md-3 {
-    padding-top: 20%;
-}
-
-
-#songs {
-    position: absolute;
-    top: 50%;
-    right: 20%;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: flex-end;
-    overflow-y: auto;
-    max-height: 100vh;
-}
-
-.play-song:hover {
-    opacity: 50%;
-}
-
-#buttons {
-    position: absolute;
-    top: 40%;
-    right: 20%;
-}
-
-#custom-Range {
-    width: 200px;
-    height: auto;
-}
-
-.extra-buttons:hover {
-    opacity: 50%;
-}
-
-.extra-buttons {
-    /* left: 0%; */
-    width: 70px; /* Adjust the width of the button */
-    border: none; /* Remove the border around the button */
-    background: none; /* Remove the background color of the button */
-}
-
-.extra-buttons img {
-    width: 25px; /* Adjust the width of the image to make it bigger */
-    height: 25px; /* Adjust the height of the image to make it bigger */
-}
-
-.form-range {
-    padding-right: 65px;
+.icon {
+    height: 30px;
+    width: 30px;
 }
