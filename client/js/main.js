@@ -113,6 +113,74 @@ const submitRating = async () => {
 
 }
 
+const initializePlaylistSelection = async () => {
+
+    const dropdown = document.getElementById("playlists_dropdown");
+    dropdown.innerHTML = "";
+
+    const res = await fetch('http://localhost:3000/playlists/playlistnames/?id=645a71afc005c22333f55a1b', {
+        method: "GET",
+        headers: {
+            'Content-Type': 'application/json',
+        }
+      });
+    
+      const data = await res.json();
+      const status = res.status;
+
+      if (status == 200) {
+
+        for (let i = 0; i < data.names.length; i++) {
+
+            const link = document.createElement("a");
+
+            link.class = "playlist";
+            link.innerHTML = data.names[i];
+            link.addEventListener("click", addSongtoPlaylist);
+
+            dropdown.appendChild(link);
+        }
+
+      }
+    
+    dropdown.style.display = "block";
+
+}
+
+const addSongtoPlaylist = async (event) => {
+
+    const playlistname = String(event.target.textContent);
+
+    console.log(playlistname);
+
+    //currrently adds the song mystery lady to database
+    let res = await fetch(`http://localhost:3000/home/addsong/${playlistname}/645a71afc005c22333f55a1b`, {
+      method: "POST",
+      headers: {
+        "content-type": "application/json"
+      },
+      body: JSON.stringify({
+        "song_id": "645a71ddc005c22333f55a1c"
+        })
+    });
+
+    const status = res.status;
+
+    console.log(status);
+
+    if (status == 200) {
+        alert("added: " + song.name + " to " + playlistname + ". It's really mystery lady though right now");
+    } else {
+        alert("woops that did not work");
+    }
+
+    document.getElementById("playlists_dropdown").style.display = "none";
+
+}
+
 initializeRatingSelection();
 initializeGenreSelection();
 submit.addEventListener("click", submitRating);
+
+const add = document.getElementById("addicon");
+add.addEventListener("click", initializePlaylistSelection);

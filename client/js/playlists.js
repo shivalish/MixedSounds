@@ -89,7 +89,7 @@ const addPlaylist = async () => {
 
   let name = prompt("Type in the name of the new playlist");
 
-  if (name !== null) {
+  if (name !== null || name.length > 0) {
 
     let res = await fetch(`http://localhost:3000/playlists/addplaylist/${name}/645a71afc005c22333f55a1b`, {
       method: "POST",
