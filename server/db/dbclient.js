@@ -2,8 +2,9 @@ import { MongoClient, ServerApiVersion } from "mongodb"
 import * as env from 'dotenv'
 
 env.config();
-
-const client = new MongoClient(process.env.DATABASE_URL, {
+console.log(process.env.DATABASE_URL);
+const client = new MongoClient('mongodb+srv://griffin:3TMID9FEtW7yL9G3@musicdb.hlikcqd.mongodb.net/?retryWrites=true&w=majority'
+, {
     serverApi: {
       version: ServerApiVersion.v1,
       strict: true,
