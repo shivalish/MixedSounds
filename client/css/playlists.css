@@ -13,7 +13,7 @@
     border-style: solid;
   }
 
-  .playlists {
+  #playlists {
     display: grid;
     grid-template-columns: auto 1fr;
 
@@ -28,7 +28,7 @@
     flex-direction: column;
   }
 
-  #playlistinfo > div {
+  #playlisticons {
     display: flex;
     flex-direction: row;
   }
@@ -72,7 +72,7 @@
     width: 30px;
 }
 
-.icon:hover {
+.icon:hover, .square:hover {
     opacity: 70%;
     cursor: pointer;
   }

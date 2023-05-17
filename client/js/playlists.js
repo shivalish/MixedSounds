@@ -17,7 +17,7 @@ const renderPage = async () => {
 
     if (data.names.length > 0) {
       renderPlaylists(data);
-      renderCurrentPlaylist(data[0]);
+      renderCurrentPlaylist(data.names[0]);
     }
  
   } else {
@@ -28,8 +28,8 @@ const renderPage = async () => {
 
 const renderPlaylists = (data) => {
 
-  const playlists = document.createElement("div");
-  playlists.className = "playlists";
+  const playlists = document.getElementById("playlists");
+  playlists.innerHTML = "";
 
   for (let i = 0; i < data.names.length; i++) {
 
@@ -40,6 +40,8 @@ const renderPlaylists = (data) => {
     square.className = "square";
 
     square.style.backgroundColor = "#BCE2E9";
+
+    square.addEventListener("click", () => renderCurrentPlaylist(data.names[i]));
 
     column.appendChild(square);
 
@@ -53,14 +55,69 @@ const renderPlaylists = (data) => {
 
   }
 
+  renderaddtoplaylist(playlists);
+
   gridContainer.appendChild(playlists);
 
 }
 
+const renderaddtoplaylist = (playlists) => {
+
+  const column = document.createElement("div");
+  column.className = "col-1";
+
+  const square = document.createElement("div");
+  square.className = "square";
+
+  square.style.backgroundColor = "#BCE2E9";
+
+  column.appendChild(square);
+
+  const title = document.createElement("div");
+  title.className = "col-2";
+
+  title.innerHTML = "Add to playlist";
+
+  square.addEventListener("click", addPlaylist);
+
+  playlists.appendChild(column);
+  playlists.appendChild(title);
+
+}
+
+const addPlaylist = async () => {
+
+  let name = prompt("Type in the name of the new playlist");
+
+  if (name !== null) {
+
+    let res = await fetch(`http://localhost:3000/playlists/addplaylist/${name}/645a71afc005c22333f55a1b`, {
+      method: "POST",
+      headers: {
+        "content-type": "application/json"
+      },
+    });
+  
+    const status = res.status;
+  
+    if (status == 200) {
+      alert("successfuly added playlist: " + name)
+      renderPage();
+    } else {
+      alert("sorry something weird happened it did not work");
+    }
+
+  }
+
+}
+
+
 const renderCurrentPlaylist = async (playlistname) => {
 
+  console.log(playlistname);
+
   //get playlist
-  const res = await fetch('http://localhost:3000/playlists/playlist1/645a71afc005c22333f55a1b', {
+  const res = await fetch(`http://localhost:3000/playlists/${playlistname}/645a71afc005c22333f55a1b`, {
     method: "GET",
     headers: {
         'Content-Type': 'application/json',
@@ -73,15 +130,17 @@ const renderCurrentPlaylist = async (playlistname) => {
   if (status == 200) {
     renderPlaylist(data);
   } else {
-    alert("Oh no there was no trouble");
+    alert("Oh no there was trouble loading the playlist");
   }
 }
 
 const renderPlaylist = (data) => {
 
   const playlistinfo = document.getElementById("playlistinfo");
+  const songs = document.getElementById("songs");
   const title = document.getElementById("playlist-title");
 
+  songs.innerHTML = "";
   title.innerHTML = data.name;
 
   for (let i = 0; i < data.songs.length; i++) {
@@ -94,9 +153,12 @@ const renderPlaylist = (data) => {
 
     song.appendChild(songtitle);
 
-    playlistinfo.appendChild(song);
+    songs.appendChild(song);
 
   }
+
+  playlistinfo.appendChild(songs);
+
 
 }
 
