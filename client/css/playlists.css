@@ -1,4 +1,4 @@
-.gridContainer {    /* class name 'container' conflicts w/Bootstrap */
+#gridContainer {    /* class name 'container' conflicts w/Bootstrap */
     min-width: 100vw;
     height: 100vh;
     display: grid;

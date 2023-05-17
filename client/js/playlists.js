@@ -1,25 +1,59 @@
-// this currently gets a fake list of songs from a json file and then creates divs for each song and appends them to the page.
-async function getSongs() {
-    const response = await fetch('../server/data.json');
-    const data = await response.json();
-    document.getElementById("songs").innerHTML = "";
-    Object.values(data).forEach(name => {
-        const div = document.createElement('div');
-        div.className = 'play-song';
-  
-        div.innerHTML = `
-          <ul>${name.name} - ${name.artists}</ul>
-        `;
+const gridContainer = document.getElementById("gridContainer");
 
-        document.getElementById("songs").appendChild(div);
-    });
-    const div = document.createElement('div');
-    div.className = 'play-song';
+const renderPlaylists = async () => {
 
-    div.innerHTML = `<ul>Add a song</ul>`;
-    document.getElementById("songs").appendChild(div);
+  const playlists = document.createElement("div");
+  playlists.className = "playlists";
+
+  //get playlist names
+  const res = await fetch('http://localhost:3000/playlists/playlistnames/?id=645a71afc005c22333f55a1b', {
+    method: "GET",
+    headers: {
+        'Content-Type': 'application/json',
+    }
+  });
+
+  const data = await res.json();
+  const status = res.status;
+
+  console.log(data);
+
+  if (status === 200) {
+
+    for (let i = 0; i < data.names.length; i++) {
+
+      const column = document.createElement("div");
+      column.className = "col-1";
+
+      const square = document.createElement("div");
+      square.className = "square";
+
+      square.style.backgroundColor = "#BCE2E9";
+
+      column.appendChild(square);
+
+      const title = document.createElement("div");
+      title.className = "col-2";
+
+      title.innerHTML = data.names[i];
+
+      playlists.appendChild(column);
+      playlists.appendChild(title);
+
+    }
+
+    gridContainer.appendChild(playlists);
+
+  } else {
+    alert("error loading playlists");
   }
 
-  document.getElementById("playlist1").addEventListener('click',getSongs);
-  document.getElementById("playlist2").addEventListener('click',getSongs);
-//   document.getElementById("songs").addEventListener(onclick,)
+}
+
+const renderCurrentPlaylist = (playlistname) => {
+
+  //get playlist
+
+}
+
+renderPlaylists();

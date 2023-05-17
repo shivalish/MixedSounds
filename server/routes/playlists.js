@@ -121,13 +121,11 @@ router.post("/addsong/:name/:id", async (req, res) => {
 
 });
 
-//need to have id in req.body for some reason
+//need to have id as "?id=" in url for some reason
 //get playlist names
 router.get("/playlistnames", async (req, res) => {
 
-  console.log("I am here");
-
-  let userid = req.body.id;
+  let userid = req.query.id;
 
   let usercollection = db.collection("userbase");
   let playlistscollection = db.collection("playlists");
@@ -143,7 +141,7 @@ router.get("/playlistnames", async (req, res) => {
     names.push(arr[i].name);
   }
 
-  let results = {names: [names]};
+  let results = {names: names};
 
   if (!results) res.send("Not found").status(404);
   else res.send(results).status(200);
