@@ -33,6 +33,11 @@
     flex-direction: row;
   }
 
+  .song {
+    padding: 10px;
+    margin-left: 75px;
+  }
+
   .col-1 {
     grid-column-start: 1;
     grid-column-end: 2;
@@ -66,3 +71,8 @@
     height: 30px;
     width: 30px;
 }
+
+.icon:hover {
+    opacity: 70%;
+    cursor: pointer;
+  }
