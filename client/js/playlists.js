@@ -76,7 +76,7 @@ const renderaddtoplaylist = (playlists) => {
   const title = document.createElement("div");
   title.className = "col-2";
 
-  title.innerHTML = "Add to playlist";
+  title.innerHTML = "Add a playlist";
 
   square.addEventListener("click", addPlaylist);
 
