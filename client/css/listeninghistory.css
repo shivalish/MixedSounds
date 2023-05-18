@@ -53,6 +53,7 @@ h1, h2, h3, h4, h5, h6 {
 .rating img {
   width: 50px;
   opacity: 0.35;
+  margin-right: 3px;
 }
 .rating img.selected {
   opacity: 1;
