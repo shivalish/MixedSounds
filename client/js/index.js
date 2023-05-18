@@ -8,7 +8,7 @@ loginButton.addEventListener('click', async (event) => {
 
     try {
 
-        const res = await fetch('/auth/login', {
+        const res = await fetch('/login', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -38,7 +38,7 @@ registerButton.addEventListener('click', async (event) => {
 
     // sending a post request to the server /register
 
-        const res = await fetch('/auth/register', {
+        const res = await fetch('/register', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -46,8 +46,6 @@ registerButton.addEventListener('click', async (event) => {
             },
             body: JSON.stringify({ username: username, password: password })
         });
-
-        console.log(res);
 
         const status = res.status;
 

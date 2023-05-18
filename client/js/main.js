@@ -106,7 +106,7 @@ const submitRating = async () => {
         const comment = document.getElementById("comment").value;
 
         //change to get user id
-        const response = await fetch(`/home/submit/645a71afc005c22333f55a1b`, {
+        const response = await fetch(`/home/submit`, {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json',
@@ -137,7 +137,7 @@ const initializePlaylistSelection = async () => {
     const dropdown = document.getElementById("playlists_dropdown");
     dropdown.innerHTML = "";
 
-    const res = await fetch('http://localhost:3000/playlists/playlistnames/?id=645a71afc005c22333f55a1b', {
+    const res = await fetch('/home/playlistnames', {
         method: "GET",
         headers: {
             'Content-Type': 'application/json',
@@ -146,7 +146,7 @@ const initializePlaylistSelection = async () => {
     
       const data = await res.json();
       const status = res.status;
-
+ 
       if (status == 200) {
 
         for (let i = 0; i < data.names.length; i++) {
@@ -173,7 +173,7 @@ const addSongtoPlaylist = async (event) => {
     console.log(playlistname);
 
     //currrently adds the song mystery lady to database
-    let res = await fetch(`http://localhost:3000/home/addsong/${playlistname}/645a71afc005c22333f55a1b`, {
+    let res = await fetch(`/playlists/addsong/${playlistname}`, {
       method: "POST",
       headers: {
         "content-type": "application/json"

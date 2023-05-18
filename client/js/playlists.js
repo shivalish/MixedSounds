@@ -3,7 +3,7 @@ const gridContainer = document.getElementById("gridContainer");
 const renderPage = async () => {
 
   //get playlist names
-  const res = await fetch('http://localhost:3000/playlists/playlistnames/?id=645a71afc005c22333f55a1b', {
+  const res = await fetch('/home/playlistnames', {
     method: "GET",
     headers: {
         'Content-Type': 'application/json',
@@ -94,7 +94,7 @@ const addPlaylist = async () => {
 
   if (name !== null || name.length > 0) {
 
-    let res = await fetch(`http://localhost:3000/playlists/addplaylist/${name}/645a71afc005c22333f55a1b`, {
+    let res = await fetch(`/playlists/addplaylist/${name}`, {
       method: "POST",
       headers: {
         "content-type": "application/json"
@@ -120,7 +120,7 @@ const renderCurrentPlaylist = async (playlistname) => {
   console.log(playlistname);
 
   //get playlist
-  const res = await fetch(`http://localhost:3000/playlists/${playlistname}/645a71afc005c22333f55a1b`, {
+  const res = await fetch(`/playlists/${playlistname}`, {
     method: "GET",
     headers: {
         'Content-Type': 'application/json',
@@ -139,10 +139,8 @@ const renderCurrentPlaylist = async (playlistname) => {
 
 const renderCurrentShuffledPlaylist = async (playlistname) => {
 
-  console.log(playlistname);
-
   //get playlist
-  const res = await fetch(`http://localhost:3000/playlists/${playlistname}/645a71afc005c22333f55a1b`, {
+  const res = await fetch(`/playlists/${playlistname}`, {
     method: "GET",
     headers: {
         'Content-Type': 'application/json',

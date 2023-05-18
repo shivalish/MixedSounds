@@ -7,11 +7,7 @@ const getUser = async (username) => {
     //find already registered user
     let result = await usercollection.findOne({ username: username });
 
-    if (result == null) {
-        return null;
-    } else {
-        return result;
-    }
+    return result;
 
 }
 
