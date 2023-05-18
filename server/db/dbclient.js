@@ -23,10 +23,25 @@ async function run() {
       // Ensures that the client will close when you finish/error
       //await client.close();
     }
-  }
+}
 
-  run().catch(console.dir);
+run().catch(console.dir);
 
-  let db = client.db("musicdb");
 
-  export default db;
+let db = client.db("musicdb");
+
+async function getUser(username) {
+    const usersCollection = db.collection('userbase');
+    const user = await usersCollection.findOne({ username });
+    return user;
+}
+
+async function registerUser(username, password) {
+    console.log("here");
+    const usersCollection = db.collection('userbase');
+    const result = await usersCollection.insertOne({ username, password });
+    return result.insertedId;
+}
+
+export { getUser, registerUser };
+export default client;

@@ -2,45 +2,61 @@ import { Router } from 'express';
 import { body, check, validationResult } from 'express-validator';
 import passport from 'passport';
 import { Strategy as LocalStrategy } from 'passport-local';
-import * as dbclient from "../db/dbclient.js";
-import router from './home.js';
+import {registerUser} from "../db/dbclient.js";
+import bcrypt from 'bcrypt';
 
 
 
-
-// import db from '../db/dbclient';
 const authRouter = Router();
 
 // authRouter.post('/login', passport.authenticate('local'), (req, res) => {
 //     res.send(200);
 // });
+
 authRouter.post('/register', [
     body('username')
     .notEmpty()
-    .withMessage("username cannot be empty")
+    .withMessage("Username cannot be empty")
     .isLength({min: 5})
-    .withMessage("username must be at least 5 characters long"),
+    .withMessage("Username must be at least 5 characters long"),
     body('password')
     .notEmpty()
-    .withMessage("password cannot be empty")
+    .withMessage("Password cannot be empty")
     .isLength({min: 5})
-    .withMessage("password must be at least 5 characters long")
+    .withMessage("Password must be at least 5 characters long")
 ], async (req, res) => { 
-    if(!validationResult(req).isEmpty()){
-        console.log("error in validation");
-        return res.status(400);
+    const {username, password} = req.body;
+    console.log(username);
+    const hash = await bcrypt.hash(password, 10);
+    try {
+        let result = await registerUser(username, hash);
+        alert(result);
+        res.sendStatus(200);
+    } catch (err) {
+        console.log(err);
+        res.sendStatus(500).send("Failed to register user");
     }
 }
 )
 
 passport.use(new LocalStrategy(
     async (username, password, done) => { 
-        const userDB = await dbclient.db('musicdb')
-        const userCollection = await userDB.userCollection("userbase");
-        const result = await userCollection.insertOne({username: username,  password: password});
-        console.log("user is registerd");
+        const user = await getUser(username);
+        if(!user){
+            return done(null, false);
+        }
+        const match = await bcrypt.compare(password, user.password);
+        if(!match){
+            return done(null, false);
+        }
+        return done(null, user);
+    }));
+
+authRouter.post('/login', 
+    passport.authenticate('local'), 
+    (req, res) => {
+        res.sendStatus(200);
     }
-    ));
+);
 
-
-    export default router;
+    export default authRouter;
