@@ -1,4 +1,5 @@
 const gridContainer = document.getElementById("gridContainer");
+const shuffle = document.getElementById("shuffle");
 
 const renderPage = async () => {
 
@@ -29,10 +30,7 @@ const renderPage = async () => {
 const renderPlaylists = (data) => {
 
   const playlists = document.getElementById("playlists");
-  const shuffle = document.getElementById("shuffle");
   playlists.innerHTML = "";
-
-  shuffle.addEventListener("click", () => renderCurrentShuffledPlaylist(data.names[0]));
 
   for (let i = 0; i < data.names.length; i++) {
 
@@ -218,3 +216,4 @@ const shufflePlaylist = (data) => {
 
 
 renderPage();
+shuffle.addEventListener("click", () => renderCurrentShuffledPlaylist(document.getElementById("playlist-title").innerHTML));
