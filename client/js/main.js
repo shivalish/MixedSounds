@@ -9,6 +9,25 @@ const genres = document.getElementById("genres");
 
 const ratings = [onestar, twostar, threestar, fourstar, fivestar];
 
+//authenticate spotify User process
+//get url hash
+const hash = window.location
+    .hash
+    .substring(1)
+    .split("&")
+    .reduce((init, item) => {
+        if(item){
+            var splitted = item.split('=');
+            init[splitted[0]] = decodeURIComponent(splitted[1]);
+        }
+        return init;
+    }, {});
+window.location.hash = '';
+
+
+const clientID = '31a69cb16d5248f2870cae5abad2561b';
+
+
 //CHANGE THIS to be able to generate random song every time
 const song =
     {
