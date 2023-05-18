@@ -51,10 +51,6 @@ app.post('/register', [
     .withMessage("Password must be at least 5 characters long")
 ], auth.register);
 
-app.get("/test", (req, res) => {
-    console.log(req.user)
-});
-
 app.listen(port, () => {
     console.log(`Hello we are on port: ${port}`);
 });
