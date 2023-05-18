@@ -32,6 +32,19 @@ authRouter.post('/register', [
         let result = await registerUser(username, hash);
         alert(result);
         res.sendStatus(200);
+        let usercollection = db.collection("userbase");
+        let historycollection = db.collection("history");
+        let playlistcollection = db.collection("playlists");
+
+        //create history
+        const history_id = (await historycollection.insertOne({history: []})).insertedId;
+
+        //create playlists
+        const playlists_id = (await playlistcollection.insertOne({playlists: []})).insertedId;
+
+        //insert into userbase
+        const playlist = await usercollection.insertOne({ username: username, password: password, history_id: history_id.valueOf(), playlists_id: playlists_id.valueOf() });
+
     } catch (err) {
         console.log(err);
         res.sendStatus(500).send("Failed to register user");
