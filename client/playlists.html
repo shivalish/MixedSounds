@@ -38,32 +38,73 @@
       </div>
       
      </div>
-
-    <!-- the buttons for the different playlists -->
-    <div class="play-container">
-        <div class="col-md-3">
-          <button id="playlist1" class="btn btn-outline-dark btn-lg btn-square">Country</button>
-        </div>
-        <div class="col-md-3">
-          <button id="playlist2" class="btn btn-outline-dark btn-lg btn-square">Rap</button>
-        </div>
-        <div class="col-md-3">
-          <button id="new-playlist" class="btn btn-outline-dark btn-lg btn-square">New Playlist</button>
-        </div>
-    </div>
-
-    <!-- buttons for playing, shuffling, sharing, exporting, or changing the volume for songs in the different playlists -->
-    <div id="buttons">
-      <button class="extra-buttons btn" style="font-size: 90%;">export</button>
-      <button class="extra-buttons btn"><img src="images/play.svg"></button>
-      <button class="extra-buttons btn"><img src="images/shuffle.svg"></button>
-      <button class="extra-buttons btn"><img src="images/share.svg"></button>
-      <label for="custom-Range" class="form-label"><img src="images/volume-up-fill.svg" style="width:50px;height:50px;"></label>
-      <input type="range" class="form-range" id="custom-Range">
-    </div>
-    <div id="songs"></div>
     
     <h1 id="pageTitle">Playlists</h1>
+
+    <div id="gridContainer">
+
+      <div id="playlists">
+
+         <!--
+        <div class="col-1"><div class="square" style="background-color:#BCE2E9"></div></div>
+        <div class="col-2">Country Favorites</div>
+
+        <div class="col-1"><div class="square" style="background-color:#FDD42E"></div></div>
+        <div class="col-2">Dance Songs</div>
+
+        <div class="col-1"><div class="square" style="background-color:#F49E67"></div></div>
+        <div class="col-2">Sad Bangerz</div>
+
+        <div class="col-1"><div class="square" style="background-color:#fde5d7"></div></div>
+        <div class="col-2">Add to a playlist</div>
+
+        -->
+
+      </div>
+
+      <div id="playlistinfo">
+
+        <div id="playlist-title"></div>
+
+        <div id="playlisticons">
+
+          <div class="music-icon">
+            <img class="icon" src="./images/playbutton.png">
+            <label>Play</label>
+          </div>
+  
+          <div class="music-icon">
+            <img class="icon" src="./images/volumeicon.png">
+            <label>Volume</label>
+          </div>
+
+          <div class="music-icon">
+            <img class="icon" id ="shuffle" src="./images/shufflebutton.png">
+            <label>Shuffle</label>
+          </div>
+
+          <div class="music-icon">
+            <img class="icon" src="./images/addicon.png">
+            <label>Export</label>
+          </div>
+
+        </div>
+
+        <div id="songs">
+
+          <!--<div class="song">
+            <h6>Take Me Home</h6>
+          </div>
+      
+          <div class="song">
+            <h6>Hannah Montana Theme song</h6>
+          </div>-->
+
+        </div>
+
+      </div>
+
+    </div>
 
     <script type="module" src="js/playlists.js"></script>
     <script type="module" src="js/menu.js"></script>
