@@ -29,7 +29,10 @@ const renderPage = async () => {
 const renderPlaylists = (data) => {
 
   const playlists = document.getElementById("playlists");
+  const shuffle = document.getElementById("shuffle");
   playlists.innerHTML = "";
+
+  shuffle.addEventListener("click", () => renderCurrentShuffledPlaylist(data.names[0]));
 
   for (let i = 0; i < data.names.length; i++) {
 
@@ -134,6 +137,28 @@ const renderCurrentPlaylist = async (playlistname) => {
   }
 }
 
+const renderCurrentShuffledPlaylist = async (playlistname) => {
+
+  console.log(playlistname);
+
+  //get playlist
+  const res = await fetch(`http://localhost:3000/playlists/${playlistname}/645a71afc005c22333f55a1b`, {
+    method: "GET",
+    headers: {
+        'Content-Type': 'application/json',
+    }
+  });
+
+  const data = await res.json();
+  const status = res.status;
+
+  if (status == 200) {
+    shufflePlaylist(data);
+  } else {
+    alert("Oh no there was trouble loading the playlist");
+  }
+}
+
 const renderPlaylist = (data) => {
 
   const playlistinfo = document.getElementById("playlistinfo");
@@ -161,5 +186,37 @@ const renderPlaylist = (data) => {
 
 
 }
+
+const shufflePlaylist = (data) => {
+  const playlistinfo = document.getElementById("playlistinfo");
+  const songs = document.getElementById("songs");
+  const title = document.getElementById("playlist-title");
+
+  songs.innerHTML = "";
+  console.log(data.name);
+  title.innerHTML = data.name;
+
+  const shuffledSongs = [...data.songs];
+  console.log(shuffledSongs);
+
+  for (let i = shuffledSongs.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [shuffledSongs[i], shuffledSongs[j]] = [shuffledSongs[j], shuffledSongs[i]];
+  }
+
+  for (let i = 0; i < shuffledSongs.length; i++) {
+    const song = document.createElement("div");
+    song.className = "song";
+
+    const songtitle = document.createElement("h6");
+    songtitle.innerText = shuffledSongs[i].name + " - " + shuffledSongs[i].album;
+
+    song.appendChild(songtitle);
+    songs.appendChild(song);
+  }
+
+  playlistinfo.appendChild(songs);
+};
+
 
 renderPage();
