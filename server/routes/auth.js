@@ -2,16 +2,30 @@ import { Router } from 'express';
 import { body, check, validationResult } from 'express-validator';
 import passport from 'passport';
 import { Strategy as LocalStrategy } from 'passport-local';
-import {registerUser} from "../db/dbclient.js";
+import {getUser, registerUser} from "../db/user.js";
 import bcrypt from 'bcrypt';
-
-
+import session from 'express-session';
 
 const authRouter = Router();
 
-// authRouter.post('/login', passport.authenticate('local'), (req, res) => {
-//     res.send(200);
-// });
+authRouter.use(session({
+    secret: '326',
+    resave: false,
+    saveUninitialized: false,
+}));
+
+authRouter.use(passport.initialize());
+authRouter.use(passport.session());
+
+passport.serializeUser((user, done) => {
+    done(null, user._id);
+});
+  
+// Convert a unique identifier to a user object.
+passport.deserializeUser(async (username, done) => {
+    const user = await getUser(username);
+    done(null, user);
+});
 
 authRouter.post('/register', [
     body('username')
@@ -24,52 +38,63 @@ authRouter.post('/register', [
     .withMessage("Password cannot be empty")
     .isLength({min: 5})
     .withMessage("Password must be at least 5 characters long")
+
 ], async (req, res) => { 
+    
     const {username, password} = req.body;
-    console.log(username);
-    const hash = await bcrypt.hash(password, 10);
-    try {
+
+    if (getUser(username) !== null) {
+        res.sendStatus(500);
+    } else {
+
+        const hash = await bcrypt.hash(password, 10);
+
         let result = await registerUser(username, hash);
-        alert(result);
-        res.sendStatus(200);
-        let usercollection = db.collection("userbase");
-        let historycollection = db.collection("history");
-        let playlistcollection = db.collection("playlists");
 
-        //create history
-        const history_id = (await historycollection.insertOne({history: []})).insertedId;
+        if (result !== null) {
+            res.send({ redirectUrl: '/home' });
+        } else {
+            res.sendStatus(500);
+        }
 
-        //create playlists
-        const playlists_id = (await playlistcollection.insertOne({playlists: []})).insertedId;
-
-        //insert into userbase
-        const playlist = await usercollection.insertOne({ username: username, password: password, history_id: history_id.valueOf(), playlists_id: playlists_id.valueOf() });
-
-    } catch (err) {
-        console.log(err);
-        res.sendStatus(500).send("Failed to register user");
     }
-}
-)
+
+})
 
 passport.use(new LocalStrategy(
+
     async (username, password, done) => { 
+
         const user = await getUser(username);
-        if(!user){
+
+        if(user == null){
             return done(null, false);
         }
+
         const match = await bcrypt.compare(password, user.password);
+
         if(!match){
             return done(null, false);
         }
+
         return done(null, user);
-    }));
 
-authRouter.post('/login', 
-    passport.authenticate('local'), 
-    (req, res) => {
-        res.sendStatus(200);
+}));
+
+authRouter.get("/logout", (req, res) => {
+    if (req.session) {
+        req.session.destroy();
+        res.send({redirectUrl: "/"});
+    } else {
+        const err = new Error("You are not logged in!");
+        err.status = 401;
+        res.send(err);
     }
-);
+});
 
-    export default authRouter;
+authRouter.post('/login', passport.authenticate('local'),
+function(req, res) {
+  res.send({ redirectUrl: '/home' });
+});
+
+export default authRouter;
