@@ -2,15 +2,14 @@ import { MongoClient, ServerApiVersion } from "mongodb"
 import * as env from 'dotenv'
 
 env.config();
-console.log(process.env.DATABASE_URL);
-const client = new MongoClient('mongodb+srv://griffin:3TMID9FEtW7yL9G3@musicdb.hlikcqd.mongodb.net/?retryWrites=true&w=majority'
-, {
-    serverApi: {
-      version: ServerApiVersion.v1,
-      strict: true,
-      deprecationErrors: true,
-    }
-  });
+
+const client = new MongoClient(process.env.DATABASE_URL, {
+  serverApi: {
+    version: ServerApiVersion.v1,
+    strict: true,
+    deprecationErrors: true,
+  }
+});
 
 async function run() {
     try {
@@ -27,21 +26,6 @@ async function run() {
 
 run().catch(console.dir);
 
-
 let db = client.db("musicdb");
 
-async function getUser(username) {
-    const usersCollection = db.collection('userbase');
-    const user = await usersCollection.findOne({ username });
-    return user;
-}
-
-async function registerUser(username, password) {
-    console.log("here");
-    const usersCollection = db.collection('userbase');
-    const result = await usersCollection.insertOne({ username, password });
-    return result.insertedId;
-}
-
-export { getUser, registerUser };
-export default client;
+export default db;
