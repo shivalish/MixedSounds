@@ -15,7 +15,7 @@ router.get('/', (req, res) => {
 });
 
 //get - fetches listening history and ratings
-router.get("/:id", async (req, res) => {
+router.get("/user", async (req, res) => {
 
   //get objectid for user
   //fetch listening history
@@ -27,7 +27,7 @@ router.get("/:id", async (req, res) => {
   let songscollection = db.collection("songs");
   let historycollection = db.collection("history");
 
-  let user = await usercollection.findOne({ _id: new ObjectId(req.params.id) });
+  let user = await usercollection.findOne({ _id: new ObjectId(req.user._id) });
 
   let history = await historycollection.findOne({ _id: user.history_id });
 

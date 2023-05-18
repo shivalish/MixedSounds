@@ -15,23 +15,13 @@ router.get('/', (req, res) => {
 });
 
 //post - submit button
-router.post("/submit/:id", async(req, res) => {
+router.post("/submit", async(req, res) => {
 
-    /*
-    create song and add to database
-    get song_id
-    create rating and add to database
-    get rating_id
-    create listening history doc with song_id and rating_id
-  */
-
-  let usercollection = db.collection("userbase");
   let ratingscollection = db.collection("ratings");
   let songscollection = db.collection("songs");
   let historycollection = db.collection("history");
 
-  let user = await usercollection.findOne({ _id: new ObjectId(req.params.id) });
-  let history = await historycollection.findOne({ _id: user.history_id });
+  let history = await historycollection.findOne({ _id: new ObjectId(req.user.history_id) });
 
   let song_id = (await songscollection.insertOne(req.body.song)).insertedId;
 
@@ -43,7 +33,7 @@ router.post("/submit/:id", async(req, res) => {
     $set: { history : history.history }
   };
 
-  let query = { _id: user.history_id };
+  let query = { _id: new ObjectId(req.user.history_id)};
   
   let result = await historycollection.updateOne(query, updates);
   
@@ -51,39 +41,25 @@ router.post("/submit/:id", async(req, res) => {
 
 });
 
-//post - song to playlist
-router.post("/addsong/:name/:id", async (req, res) => {
+//get playlist names
+router.get("/playlistnames", async (req, res) => {
 
-  let songid = req.body.song_id;
-  let userid = req.params.id;
-  let playlistname = req.params.name;
-
-  let usercollection = db.collection("userbase");
   let playlistscollection = db.collection("playlists");
-  let user = await usercollection.findOne({ _id: new ObjectId(userid) });
 
-  let query = { _id: user.playlists_id };
-
-  let playlists = await playlistscollection.findOne(query);
+  let playlists = await playlistscollection.findOne({ _id: new ObjectId(req.user.playlists_id) });
 
   let arr = playlists.playlists;
 
-    //find playlist
-    for (let p in arr) {
+  let names = [];
 
-      if (arr[p].name === playlistname) {
-        arr[p].songs.push(new ObjectId(songid));
-        break;
-      }
-    }
+  for (let i = 0; i < arr.length; i++) {
+    names.push(arr[i].name);
+  }
 
-  const updates = {
-    $set: { playlists: arr }
-  };
+  let results = {names: names};
 
-  let result = await playlistscollection.updateOne(query, updates);
-
-  res.send(result).status(204);
+  if (!results) res.send("Not found").status(404);
+  else res.send(results).status(200);
 
 });
 

@@ -3,11 +3,12 @@ const historycontainer = document.getElementById("historyContainer");
 const render = async () => {
 
     //change this
-    const res = await fetch('/history/645a71afc005c22333f55a1b', {
+    const res = await fetch('/history/user', {
         method: "GET",
         headers: {
             'Content-Type': 'application/json',
-        }
+        },
+        credentials: 'include'
     });
 
     const data = await res.json();

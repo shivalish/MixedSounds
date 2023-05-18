@@ -15,15 +15,12 @@ router.get('/', (req, res) => {
 });
 
 //get - load playlist
-router.get("/:name/:id", async (req, res) => {
+router.get("/:name", async (req, res) => {
 
-  let usercollection = db.collection("userbase");
   let playlistscollection = db.collection("playlists");
   let songscollection = db.collection("songs");
 
-  let user = await usercollection.findOne({ _id: new ObjectId(req.params.id) });
-
-  let playlists = await playlistscollection.findOne({ _id: user.playlists_id });
+  let playlists = await playlistscollection.findOne({ _id: new ObjectId(req.user.playlists_id) });
 
   let arr = playlists.playlists;
 
@@ -55,16 +52,13 @@ router.get("/:name/:id", async (req, res) => {
 });
 
 //post - create playlist
-router.post("/addplaylist/:name/:id", async (req, res) => {
+router.post("/addplaylist/:name", async (req, res) => {
 
-  let userid = req.params.id;
   let playlistname = req.params.name;
 
-  let usercollection = db.collection("userbase");
   let playlistscollection = db.collection("playlists");
-  let user = await usercollection.findOne({ _id: new ObjectId(userid) });
 
-  let query = { _id: user.playlists_id };
+  let query = { _id: new ObjectId(req.user.playlists_id) };
 
   let playlists = await playlistscollection.findOne(query);
 
@@ -85,18 +79,14 @@ router.post("/addplaylist/:name/:id", async (req, res) => {
 });
 
 //post - add song to playlist
-router.post("/addsong/:name/:id", async (req, res) => {
+router.post("/addsong/:name", async (req, res) => {
 
-  //repeated code from /home/addsong
   let songid = req.body.song_id;
-  let userid = req.params.id;
   let playlistname = req.params.name;
 
-  let usercollection = db.collection("userbase");
   let playlistscollection = db.collection("playlists");
-  let user = await usercollection.findOne({ _id: new ObjectId(userid) });
 
-  let query = { _id: user.playlists_id };
+  let query = { _id: new ObjectId(req.user.playlists_id) };
 
   let playlists = await playlistscollection.findOne(query);
 
@@ -121,33 +111,7 @@ router.post("/addsong/:name/:id", async (req, res) => {
 
 });
 
-//need to have id as "?id=" in url for some reason
-//get playlist names
-router.get("/playlistnames", async (req, res) => {
-
-  let userid = req.query.id;
-
-  let usercollection = db.collection("userbase");
-  let playlistscollection = db.collection("playlists");
-  let user = await usercollection.findOne({ _id: new ObjectId(userid) });
-
-  let playlists = await playlistscollection.findOne({ _id: user.playlists_id });
-
-  let arr = playlists.playlists;
-
-  let names = [];
-
-  for (let i = 0; i < arr.length; i++) {
-    names.push(arr[i].name);
-  }
-
-  let results = {names: names};
-
-  if (!results) res.send("Not found").status(404);
-  else res.send(results).status(200);
-
-});
-
+//NOT USED
 //delete - delete a playlist
 router.delete("/delete/:name/:id", async (req, res) => {
 

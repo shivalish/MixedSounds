@@ -16,7 +16,7 @@ const toggleMenu = () => {
 
 const logout = async () => {
 
-  const res = await fetch('/auth/logout', {
+  const res = await fetch('/logout', {
     method: 'GET',
     headers: {
         'Content-Type': 'application/json',

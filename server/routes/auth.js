@@ -1,65 +1,19 @@
-import { Router } from 'express';
-import { body, check, validationResult } from 'express-validator';
+//import { body, check, validationResult } from 'express-validator';
 import passport from 'passport';
 import { Strategy as LocalStrategy } from 'passport-local';
 import {getUser, registerUser} from "../db/user.js";
 import bcrypt from 'bcrypt';
 import session from 'express-session';
 
-const authRouter = Router();
-
-authRouter.use(session({
-    secret: '326',
-    resave: false,
-    saveUninitialized: false,
-}));
-
-authRouter.use(passport.initialize());
-authRouter.use(passport.session());
-
 passport.serializeUser((user, done) => {
-    done(null, user._id);
+    done(null, user);
 });
   
 // Convert a unique identifier to a user object.
-passport.deserializeUser(async (username, done) => {
-    const user = await getUser(username);
+passport.deserializeUser(async (user, done) => {
+    //const user = await getUser(user.name);
     done(null, user);
 });
-
-authRouter.post('/register', [
-    body('username')
-    .notEmpty()
-    .withMessage("Username cannot be empty")
-    .isLength({min: 5})
-    .withMessage("Username must be at least 5 characters long"),
-    body('password')
-    .notEmpty()
-    .withMessage("Password cannot be empty")
-    .isLength({min: 5})
-    .withMessage("Password must be at least 5 characters long")
-
-], async (req, res) => { 
-    
-    const {username, password} = req.body;
-
-    if (getUser(username) !== null) {
-        res.sendStatus(500);
-    } else {
-
-        const hash = await bcrypt.hash(password, 10);
-
-        let result = await registerUser(username, hash);
-
-        if (result !== null) {
-            res.send({ redirectUrl: '/home' });
-        } else {
-            res.sendStatus(500);
-        }
-
-    }
-
-})
 
 passport.use(new LocalStrategy(
 
@@ -81,20 +35,44 @@ passport.use(new LocalStrategy(
 
 }));
 
-authRouter.get("/logout", (req, res) => {
-    if (req.session) {
-        req.session.destroy();
-        res.send({redirectUrl: "/"});
+const register = async(req, res) => {
+    
+    const {username, password} = req.body;
+
+    let user = await getUser(username);
+    
+    if (user !== null) {//user already in db
+        res.sendStatus(500);
     } else {
-        const err = new Error("You are not logged in!");
-        err.status = 401;
-        res.send(err);
+    
+        const hash = await bcrypt.hash(password, 10);
+    
+        let result = await registerUser(username, hash);
+    
+        if (result !== null) {
+            res.send({ redirectUrl: '/home' });
+        } else {
+            console.log("register user equals null");
+            res.sendStatus(500);
+        }
+    
     }
-});
 
-authRouter.post('/login', passport.authenticate('local'),
-function(req, res) {
-  res.send({ redirectUrl: '/home' });
-});
+}
 
-export default authRouter;
+export default {
+
+    configure: (app) => {
+        app.use(session({
+            secret: '326',
+            resave: false,
+            saveUninitialized: false
+        }));
+      app.use(passport.initialize());
+      app.use(passport.session());
+    }, 
+    authenticate: () => {
+        return passport.authenticate('local');
+    }
+    , register
+};
