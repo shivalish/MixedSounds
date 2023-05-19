@@ -15,11 +15,9 @@ const getAuthToken = async () => {
     return req.access_token;
 }
 
-const authToken = getAuthToken();
-
-const getTrack = async (token, trackOffset) => {
+const getTrack = async (token, quer, offset) => {
     const result = await fetch(
-        'https://api.spotify.com/v1/search?type=track&offset=' + trackOffset, {
+        "https://api.spotify.com/v1/search?q=" + quer +"&type=track&limit=1&offset" + offset, {
             method: 'GET',
             headers: {
                 'Authorization' : 'Bearer' + token
@@ -28,5 +26,20 @@ const getTrack = async (token, trackOffset) => {
     );
 
     const trackData = await result.json();
-    return trackData.items
+    return trackData.items;
 }
+
+const randomTrack = async() => {
+    let authToken = getAuthToken();
+
+    const alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
+    let randomAlph = Math.floor(Math.random()* 26);
+    let query = alphabet[randomAlph]; //get a random letter to search
+
+    let random_offset = Math.floor(Math.random() * 50); //offset for spotify search can go up to 1000
+
+    let track = getTrack(authToken, query, random_offset);
+
+    return track;
+}
+
