@@ -11,23 +11,6 @@ const genres = document.getElementById("genres");
 
 const ratings = [onestar, twostar, threestar, fourstar, fivestar];
 
-const clientID = '31a69cb16d5248f2870cae5abad2561b';
-const clientSecret = '917e79d402504281a7616258567680de';
-
-const getAuthToken = async () => {
-    const result = await fetch(
-        'https://accounts.spotify.com/api/token',{
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded',
-                'Authorization' : 'Basic ' + window.btoa(clientID + ':' + clientSecret)
-            },
-            body: 'grant_type = client_credentials'
-        });
-}
-
-
-
 /*authenticate spotify User process
 const spotifyAuthPoint =  "https://accounts.spotify.com/authorize";
 const redirectURL = "http://localhost:3000/home";
