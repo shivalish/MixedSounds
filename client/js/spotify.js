@@ -43,3 +43,29 @@ const randomTrack = async() => {
     return track;
 }
 
+const getTitle = async (track) => {
+    return track.tracks.items[0].name; //return string
+}
+
+const getArtist = async(track) => {
+    const artistArr = track.tracks.items[0].artists;
+    
+    let artistString  = "";
+    for(let i = 0; i < artistArr.length; i++){
+        artist = artist + artistArr[i] + " ";
+    }
+
+    return artistString; 
+}
+
+const getAlbum = async(track) => {
+    return track.tracks.items[0].album.name; //return string
+}
+
+const getArt = async(track) => {
+    return track.tracks.items[0].album.images[0].url; //returns a 640 x 640 image; to get 300 x 400 do images[1]
+}
+
+const getMP3 = async(track) => {
+    return track.tracks.items[0].preview_url;
+}
