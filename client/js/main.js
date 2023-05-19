@@ -1,3 +1,5 @@
+import express from "express";
+
 const onestar = document.getElementById("1star");
 const twostar = document.getElementById("2star");
 const threestar = document.getElementById("3star");
@@ -9,23 +11,44 @@ const genres = document.getElementById("genres");
 
 const ratings = [onestar, twostar, threestar, fourstar, fivestar];
 
-//authenticate spotify User process
-//get url hash
-const hash = window.location
-    .hash
-    .substring(1)
-    .split("&")
-    .reduce((init, item) => {
-        if(item){
-            var splitted = item.split('=');
-            init[splitted[0]] = decodeURIComponent(splitted[1]);
-        }
-        return init;
-    }, {});
-window.location.hash = '';
-
-
 const clientID = '31a69cb16d5248f2870cae5abad2561b';
+const clientSecret = '917e79d402504281a7616258567680de';
+
+const getAuthToken = async () => {
+    const result = await fetch(
+        'https://accounts.spotify.com/api/token',{
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+                'Authorization' : 'Basic ' + window.btoa(clientID + ':' + clientSecret)
+            },
+            body: 'grant_type = client_credentials'
+        });
+}
+
+
+
+/*authenticate spotify User process
+const spotifyAuthPoint =  "https://accounts.spotify.com/authorize";
+const redirectURL = "http://localhost:3000/home";
+
+const app = express();
+
+app.get('/login', function(req, res) {
+
+    var state = generateRandomString(16);
+    var scope = 'streaming user-modify-playback-state';
+  
+    res.redirect('https://accounts.spotify.com/authorize?' +
+      querystring.stringify({
+        response_type: 'code',
+        client_id: client_id,
+        scope: scope,
+        redirect_uri: redirect_uri,
+        state: state
+      }));
+  }); */
+
 
 
 //CHANGE THIS to be able to generate random song every time
@@ -36,6 +59,10 @@ const song =
         "album": "HEROES & VILLAINS",
         "genre": "hip-hop/rap"
     };
+
+const randSong = () => {
+
+}
 
 let rating = 0;
 
