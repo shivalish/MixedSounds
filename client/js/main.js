@@ -11,25 +11,31 @@ const genres = document.getElementById("genres");
 
 const ratings = [onestar, twostar, threestar, fourstar, fivestar];
 
-//CHANGE THIS to be able to generate random song every time
-const song =
-    {
-        "name": "Trance (with Travis Scott & Young Thug)",
-        "artists": ["Metro Boomin", "Travis Scott", "Young Thug"],
-        "album": "HEROES & VILLAINS",
-        "genre": "hip-hop/rap"
-    };
-
+let song = {};
+let songid = "";
+let rating = 0;
 
 const randSong = async () => {
+
     let data = await getTrackinfo();
+
+    //add song to database
+    const response = await fetch(`/home/addsong`, {
+        method: "POST",
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            "song": data
+        })
+    })
+
+    let id = await response.json();
+
+    songid = id.song_id;
+
     return data;
 }
-
-let what = await randSong();
-console.log(what);
-
-let rating = 0;
 
 const selectRating = (event) => {
 
@@ -104,7 +110,7 @@ const submitRating = async () => {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-                "song": song,
+                "song_id": songid,
                 "rating": {
                     "rating": rating,
                     "comment": comment
@@ -171,7 +177,7 @@ const addSongtoPlaylist = async (event) => {
         "content-type": "application/json"
       },
       body: JSON.stringify({
-        "song_id": "645a71ddc005c22333f55a1c"
+        "song_id": songid
         })
     });
 
@@ -180,7 +186,7 @@ const addSongtoPlaylist = async (event) => {
     console.log(status);
 
     if (status == 200) {
-        alert("added: " + song.name + " to " + playlistname + ". It's really mystery lady though right now");
+        alert("added: " + song.name + " to " + playlistname);
     } else {
         alert("woops that did not work");
     }
@@ -189,9 +195,44 @@ const addSongtoPlaylist = async (event) => {
 
 }
 
+const generateSong = async () => {
+    
+    song = await randSong();
+
+    //render title, render artist, render image
+    const album = document.getElementById("album-image");
+    const title = document.getElementById("songtitle");
+    const artist = document.getElementById("artists");
+
+    album.innerHTML = "";
+    title.innerHTML = "";
+    artist.innerHTML = "";
+
+    const img = document.createElement("img");
+    img.className = "album";
+    img.src = song.art;
+
+    console.log(song.art)
+
+    album.appendChild(img);
+
+    title.innerHTML = song.name + " from '" + song.album + "'";
+
+    let artists = "";
+
+    song.artists.forEach((x) => artists += x + ", " );
+
+    artist.innerHTML = artists.substring(0, artists.length - 2);
+
+}
+
+await generateSong();
 initializeRatingSelection();
 initializeGenreSelection();
 submit.addEventListener("click", submitRating);
 
 const add = document.getElementById("addicon");
 add.addEventListener("click", initializePlaylistSelection);
+
+const nextbutton = document.getElementById("nextbutton");
+nextbutton.addEventListener("click", generateSong);

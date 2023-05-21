@@ -51,8 +51,14 @@ const getTitle = async (track) => {
 }
 
 const getArtist = async(track) => {
+    const arr = [];
     const artists = await track.artists;
-    return artists;
+
+    for (let i = 0; i < artists.length; i++) {
+        arr.push(artists[i].name)
+    }
+
+    return arr;
 }
 
 const getAlbum = async(track) => {
@@ -78,13 +84,15 @@ const getTrackinfo = async () => {
     const artists = await getArtist(track);
     const album = await getAlbum(track);
     const mp3 = await getMP3(track);
+    const art = await getArt(track);
 
     return {
         "name": title,
         "artists": artists,
         "album": album,
         "genre": "will figure it out",
-        "mp3": mp3
+        "mp3": mp3,
+        "art": art
     }
 
 }
