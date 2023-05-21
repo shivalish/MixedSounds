@@ -1,4 +1,4 @@
-import express from "express";
+import { getTrackinfo } from "../js/spotify.js";
 
 const onestar = document.getElementById("1star");
 const twostar = document.getElementById("2star");
@@ -11,29 +11,6 @@ const genres = document.getElementById("genres");
 
 const ratings = [onestar, twostar, threestar, fourstar, fivestar];
 
-/*authenticate spotify User process
-const spotifyAuthPoint =  "https://accounts.spotify.com/authorize";
-const redirectURL = "http://localhost:3000/home";
-
-const app = express();
-
-app.get('/login', function(req, res) {
-
-    var state = generateRandomString(16);
-    var scope = 'streaming user-modify-playback-state';
-  
-    res.redirect('https://accounts.spotify.com/authorize?' +
-      querystring.stringify({
-        response_type: 'code',
-        client_id: client_id,
-        scope: scope,
-        redirect_uri: redirect_uri,
-        state: state
-      }));
-  }); */
-
-
-
 //CHANGE THIS to be able to generate random song every time
 const song =
     {
@@ -43,9 +20,14 @@ const song =
         "genre": "hip-hop/rap"
     };
 
-const randSong = () => {
 
+const randSong = async () => {
+    let data = await getTrackinfo();
+    return data;
 }
+
+let what = await randSong();
+console.log(what);
 
 let rating = 0;
 

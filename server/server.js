@@ -1,13 +1,14 @@
 import home from "./routes/home.js";
 import history from "./routes/history.js";
 import playlists from "./routes/playlists.js";
-import { body, check, validationResult } from 'express-validator';
+import auth from "./routes/auth.js"
+import spotify from "./routes/spotify.js"
+import { body } from 'express-validator';
 import express from "express";
 import path from "path";
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
 import cors from "cors";
-import auth from "./routes/auth.js"
 
 const app = express();
 const port = 3000;
@@ -24,6 +25,7 @@ app.use(express.static(path.join(__dirname, '../client')));
 app.use("/home", home);
 app.use("/history", history);
 app.use("/playlists", playlists);
+app.use("/spotify", spotify);
 
 app.post('/login', auth.authenticate(), (req, res) => { res.send({ redirectUrl: '/home' }) });
 

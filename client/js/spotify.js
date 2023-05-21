@@ -1,36 +1,38 @@
-const clientID = '31a69cb16d5248f2870cae5abad2561b';
-const clientSecret = '917e79d402504281a7616258567680de';
-
 const getAuthToken = async () => {
-    const result = await fetch(
-        'https://accounts.spotify.com/api/token',{
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded',
-                'Authorization' : 'Basic ' + window.btoa(clientID + ':' + clientSecret)
-            },
-            body: 'grant_type = client_credentials'
-        });
-    const req = await result.json();
-    return req.access_token;
+
+    const res = await fetch(`/spotify/authtoken`, {
+        method: "GET"
+    })
+    
+    let token = await res.json();
+
+    return token.access_token;
 }
 
 const getTrack = async (token, quer, offset) => {
-    const result = await fetch(
-        "https://api.spotify.com/v1/search?q=" + quer +"&type=track&limit=1&offset" + offset, {
-            method: 'GET',
-            headers: {
-                'Authorization' : 'Bearer' + token
-            }
-        }
-    );
 
-    const trackData = await result.json();
-    return trackData.items;
+    const res = await fetch(`/spotify/gettrack`, {
+        method: "POST",
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            'token': token,
+            'quer': quer,
+            'offset': offset
+        })
+    });
+
+
+    let track = await res.json();
+
+    return track.tracks.items[0];
+
 }
 
 const randomTrack = async() => {
-    let authToken = getAuthToken();
+
+    let authToken = await getAuthToken();
 
     const alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
     let randomAlph = Math.floor(Math.random()* 26);
@@ -38,34 +40,53 @@ const randomTrack = async() => {
 
     let random_offset = Math.floor(Math.random() * 50); //offset for spotify search can go up to 1000
 
-    let track = getTrack(authToken, query, random_offset);
+    let track = await getTrack(authToken, query, random_offset);
 
     return track;
 }
 
 const getTitle = async (track) => {
-    return track.tracks.items[0].name; //return string
+    const title = await track.name;
+    return title;//return string
 }
 
 const getArtist = async(track) => {
-    const artistArr = track.tracks.items[0].artists;
-    
-    let artistString  = "";
-    for(let i = 0; i < artistArr.length; i++){
-        artist = artist + artistArr[i] + " ";
-    }
-
-    return artistString; 
+    const artists = await track.artists;
+    return artists;
 }
 
 const getAlbum = async(track) => {
-    return track.tracks.items[0].album.name; //return string
+    const album = await track.album.name; //return string
+    return album;
 }
 
 const getArt = async(track) => {
-    return track.tracks.items[0].album.images[0].url; //returns a 640 x 640 image; to get 300 x 400 do images[1]
+    const art = await track.album.images[0].url; //returns a 640 x 640 image; to get 300 x 400 do images[1]
+    return art;
 }
 
 const getMP3 = async(track) => {
-    return track.tracks.items[0].preview_url;
+    const mp3 = await track.preview_url;
+    return mp3;
 }
+
+
+const getTrackinfo = async () => {
+
+    const track = await randomTrack();
+    const title = await getTitle(track);
+    const artists = await getArtist(track);
+    const album = await getAlbum(track);
+    const mp3 = await getMP3(track);
+
+    return {
+        "name": title,
+        "artists": artists,
+        "album": album,
+        "genre": "will figure it out",
+        "mp3": mp3
+    }
+
+}
+
+export { getTrackinfo };

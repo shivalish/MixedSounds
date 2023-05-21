@@ -19,7 +19,8 @@
     "mongodb": "^5.3.0",
     "passport": "^0.6.0",
     "passport-local": "^1.0.0",
-    "pouchdb": "^8.0.1"
+    "pouchdb": "^8.0.1",
+    "request": "^2.88.2"
   },
   "scripts": {
     "start": "node server/server.js"
