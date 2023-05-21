@@ -14,20 +14,29 @@ router.get('/', (req, res) => {
   res.sendFile('client/mainpage.html', { root: dirname(__dirname) })
 });
 
+
+router.post("/addsong", async (req, res) => {
+
+  let songscollection = db.collection("songs");
+  let song_id = (await songscollection.insertOne(req.body.song)).insertedId;
+
+  res.send({song_id: song_id});
+
+});
+
 //post - submit button
 router.post("/submit", async(req, res) => {
 
   let ratingscollection = db.collection("ratings");
-  let songscollection = db.collection("songs");
   let historycollection = db.collection("history");
 
   let history = await historycollection.findOne({ _id: new ObjectId(req.user.history_id) });
 
-  let song_id = (await songscollection.insertOne(req.body.song)).insertedId;
+  let song_id = req.body.song_id;
 
   let rating_id = (await ratingscollection.insertOne(req.body.rating)).insertedId;
 
-  history.history.push({song_id: song_id.valueOf(), rating_id: rating_id.valueOf() });
+  history.history.push({song_id: new ObjectId(song_id), rating_id: rating_id.valueOf() });
 
   const updates = {
     $set: { history : history.history }
