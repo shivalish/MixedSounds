@@ -28,10 +28,10 @@
       </div>
       <div id="navbar">
         <ul>
-          <a href="mainpage.html"><li id="currPage">Home</li></a>
-          <a href="listeninghistory.html"><li>Listening History</li></a>
-          <a href="playlists.html"><li>Playlists</li></a>
-          <a href="index.html"><li id="logout">Log out</li></a>
+          <a href="/home"><li id="currPage">Home</li></a>
+          <a href="/history"><li>Listening History</li></a>
+          <a href="/playlists"><li>Playlists</li></a>
+          <a href="/"><li id="logout">Log out</li></a>
         </ul>
       </div> 
     </div>
@@ -39,8 +39,8 @@
     <!--album-->
     <div class="flexContainer">
       <div><button class="btn btn-lg"><img class="skip-button" src="images/skipbutton_back.png"></button></div>
-      <div><img src="images/Metro-Boomin.webp" class="album"></div>
-      <div><button class="btn btn-lg"><img class="skip-button" src="images/skipbutton.png"></button></div>
+      <div id="album-image"></div>
+      <div><button id="nextbutton" class="btn btn-lg"><img class="skip-button" src="images/skipbutton.png"></button></div>
     </div>
 
     <div class="solid-bg">
@@ -48,27 +48,30 @@
       <!--Song info with title and artist-->
       <div class="flexContainer">
         <div class="marquee">
-          <div class="title">Trance (with Travis Scott & Young Thug) from Heroes & Villains</div>
+          <div id="songtitle" class="title"></div>
         </div>
       </div>
       <div class="flexContainer">
-        <div class="artist">Metro Boomin, Travis Scott, Young Thug</div>
+        <div id="artists" class="artist"></div>
       </div>
 
       <!--Music play tools-->
       <div class="flexContainer">
         <div class="music-icon">
-          <img class="icon" src="./images/replaybutton.png">
+          <img id="replayicon" class="icon" src="./images/replaybutton.png">
           <label>Replay</label>
         </div>
 
         <div class="music-icon">
-          <img class="icon" src="./images/volumeicon.png">
+          <img id="volumeicon" class="icon" src="./images/volumeicon.png">
           <label>Volume</label>
         </div>
 
         <div class="music-icon">
-          <img class="icon" src="./images/addicon.png">
+          <img class="icon" id="addicon" src="./images/addicon.png">
+
+            <div id="playlists_dropdown" class="dropdown-content"></div>
+
           <label>Add to playlist</label>
         </div>
 
@@ -116,7 +119,7 @@
         <div>
           <label style="text-indent: 10px">Comments (optional)</label>
           <br />
-          <textarea type="text"></textarea>
+          <textarea id="comment" type="text"></textarea>
         </div>
       </div>
 

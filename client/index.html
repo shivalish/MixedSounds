@@ -6,7 +6,6 @@
 
     <title>Mixed Sounds</title>
     <link rel="icon" type="image/x-icon" href="../favicon.ico">
-
     <!-- font imports -->
     <link rel="stylesheet" href="css/index.css">
     <link rel="stylesheet" href="css/default.css">
@@ -20,26 +19,27 @@
 
   </head>
   <body>
-
     <header class="landing" id="landing"></header>
 
     <section class="login" id="login">
 
       <div class="wrapper">
 
-        <div class="one" id="login-header"> Get into to new music, new artists, and  new genres with Mixed Sounds!</div>
+        <div class="one" id="login-header"> Get into to new music, new artists, and new genres with Mixed Sounds!</div>
 
         <div class="two">
-          <label class="text">Username </label><input class="textbox no-outline" type="text">
+          <form>
+          <label class="text">Username </label><input class="textbox no-outline" type="text" id="username">
         </br>
-          <label class="text">Password </label> <input class="textbox no-outline" type="text">
+          <label class="text">Password </label> <input class="textbox no-outline" type="text" id="password">
+          </form>
         </div>
 
-        <div class="three">
-          <a href="mainpage.html"><button class="btn btn-default" type="submit">Log in</button></a>
-          <a href="mainpage.html"><button class="btn btn-default" type="submit">Sign up</button></a>
+        <div class="three" id="three">
+         <button class="btn btn-default" type="submit" id="Login">Log in</button>
+         <button class="btn btn-default" type="submit" id="Register">Sign up</button>
         </div>
-
+        <script src="js/index.js" type="module"></script>
       </div>
 
     </section>
