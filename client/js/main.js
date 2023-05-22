@@ -14,6 +14,7 @@ const ratings = [onestar, twostar, threestar, fourstar, fivestar];
 let song = {};
 let songid = "";
 let rating = 0;
+let audio = new Audio();
 
 const randSong = async () => {
 
@@ -228,14 +229,15 @@ const generateSong = async () => {
 
     initializeRatingSelection();
 
-    playback();
+    //var audio = new Audio(song.mp3);
+    audio.setAttribute('src', song.mp3); //change the source
+
+    playback(audio);
 
 }
 
 
-const playback = () => {
-
-    var audio = new Audio(song.mp3);
+const playback = (audio) => {
 
     document.getElementById("albumcover").addEventListener("click", async () => {
 

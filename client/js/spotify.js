@@ -38,7 +38,7 @@ const randomTrack = async() => {
     let randomAlph = Math.floor(Math.random()* 26);
     let query = alphabet[randomAlph]; //get a random letter to search
 
-    let random_offset = Math.floor(Math.random() * 50); //offset for spotify search can go up to 1000
+    let random_offset = Math.floor(Math.random() * 1000); //offset for spotify search can go up to 1000
 
     let track = await getTrack(authToken, query, random_offset);
 
