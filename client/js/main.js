@@ -32,7 +32,7 @@ const addSong = async () => {
             'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-            "song": data
+            "song": song
         })
     })
 
