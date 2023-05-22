@@ -68,7 +68,6 @@ const selectRating = (event) => {
 const ratingsclicked = (target) => {
     let clicked = true;
     ratings.forEach( (x) => { clicked = x === target ? clicked : x.style.opacity == 0.5; });
-    console.log(clicked);
     return clicked;
 }
 
@@ -199,7 +198,7 @@ const generateSong = async () => {
     
     song = await randSong();
 
-    //render title, render artist, render image
+    //render title, artist, and album image
     const album = document.getElementById("album-image");
     const title = document.getElementById("songtitle");
     const artist = document.getElementById("artists");
@@ -211,8 +210,7 @@ const generateSong = async () => {
     const img = document.createElement("img");
     img.className = "album";
     img.src = song.art;
-
-    console.log(song.art)
+    img.id = "albumcover";
 
     album.appendChild(img);
 
@@ -224,7 +222,38 @@ const generateSong = async () => {
 
     artist.innerHTML = artists.substring(0, artists.length - 2);
 
+    //clear textarea
+    const textarea = document.getElementById("comment");
+    textarea.value = "";
+
+    initializeRatingSelection();
+
+    playback();
+
 }
+
+
+const playback = () => {
+
+    var audio = new Audio(song.mp3);
+
+    document.getElementById("albumcover").addEventListener("click", async () => {
+
+        if (audio.paused) {
+            audio.play();
+        }
+        else {
+            audio.pause();
+        }
+
+    });
+
+    document.getElementById("replayicon").addEventListener("click", async () => {  
+        audio.load();
+        audio.play();
+     });
+
+  };
 
 await generateSong();
 initializeRatingSelection();
@@ -236,3 +265,5 @@ add.addEventListener("click", initializePlaylistSelection);
 
 const nextbutton = document.getElementById("nextbutton");
 nextbutton.addEventListener("click", generateSong);
+
+playback();
