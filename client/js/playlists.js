@@ -1,5 +1,6 @@
 const gridContainer = document.getElementById("gridContainer");
 const shuffle = document.getElementById("shuffle");
+const colors = ["#BCE2E9", "#FDD42E", "#F49E67","#FDE5D7"]
 
 const renderPage = async () => {
 
@@ -16,8 +17,9 @@ const renderPage = async () => {
 
   if (status === 200) {
 
+    renderPlaylists(data);
+
     if (data.names.length > 0) {
-      renderPlaylists(data);
       renderCurrentPlaylist(data.names[0]);
     }
  
@@ -40,7 +42,7 @@ const renderPlaylists = (data) => {
     const square = document.createElement("div");
     square.className = "square";
 
-    square.style.backgroundColor = "#BCE2E9";
+    square.style.backgroundColor = colors[i % colors.length];
 
     square.addEventListener("click", () => renderCurrentPlaylist(data.names[i]));
 

@@ -60,7 +60,6 @@ const selectRating = (event) => {
             } else {
                 smileyface.style.opacity = "100%";
                 rating = i + 1;
-                console.log(rating);
             }
         }
     }
@@ -103,7 +102,6 @@ const submitRating = async () => {
 
         const comment = document.getElementById("comment").value;
 
-        //change to get user id
         const response = await fetch(`/home/submit`, {
             method: "POST",
             headers: {
