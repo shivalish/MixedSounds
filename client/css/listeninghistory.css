@@ -15,7 +15,8 @@ h1, h2, h3, h4, h5, h6 {
   text-align: center;
 
   display: grid;
-  grid-template-columns: repeat(2, fit-content(70%));
+  grid-template-columns: fit-content(70%) auto;
+  justify-content: space-evenly;
 }
 
 .info, .rating, .comment {
@@ -51,9 +52,10 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .rating img {
+  float: left;
   width: 50px;
   opacity: 0.35;
-  margin-right: 3px;
+  margin: 3px;
 }
 .rating img.selected {
   opacity: 1;

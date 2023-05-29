@@ -44,8 +44,6 @@ const addSong = async () => {
 
 const selectRating = (event) => {
 
-    console.log(window.getComputedStyle(event.currentTarget).getPropertyValue("opacity"));
-
     if (ratingsclicked(event.target)) {
 
         rating = 0;
@@ -191,8 +189,6 @@ const addSongtoPlaylist = async (event) => {
 
     const status = res.status;
 
-    console.log(status);
-
     if (status == 200) {
         alert("added: " + song.name + " to " + playlistname);
     } else {
@@ -261,6 +257,10 @@ const playback = (audio) => {
     document.getElementById("replayicon").addEventListener("click", async () => {  
         audio.load();
         audio.play();
+     });
+
+    document.getElementById("volumeicon").addEventListener("click", async () => {  
+        audio.volume = ((audio.volume + 0.25) % 1)
      });
 
   };

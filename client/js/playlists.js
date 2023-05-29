@@ -117,8 +117,6 @@ const addPlaylist = async () => {
 
 const renderCurrentPlaylist = async (playlistname) => {
 
-  console.log(playlistname);
-
   //get playlist
   const res = await fetch(`/playlists/${playlistname}`, {
     method: "GET",

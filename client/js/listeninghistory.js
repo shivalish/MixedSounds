@@ -2,7 +2,6 @@ const historycontainer = document.getElementById("historyContainer");
 
 const render = async () => {
 
-    //change this
     const res = await fetch('/history/user', {
         method: "GET",
         headers: {
