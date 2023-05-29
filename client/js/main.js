@@ -20,6 +20,11 @@ const randSong = async () => {
 
     let data = await getTrackinfo();
 
+    return data;
+}
+
+const addSong = async () => {
+
     //add song to database
     const response = await fetch(`/home/addsong`, {
         method: "POST",
@@ -27,7 +32,7 @@ const randSong = async () => {
             'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-            "song": data
+            "song": song
         })
     })
 
@@ -35,7 +40,6 @@ const randSong = async () => {
 
     songid = id.song_id;
 
-    return data;
 }
 
 const selectRating = (event) => {
@@ -97,6 +101,10 @@ const submitRating = async () => {
     if (rating == 0) {
         alert("select a rating!");
     } else {
+
+        if (songid == "") {
+            await addSong();
+        }
 
         const comment = document.getElementById("comment").value;
 
@@ -163,6 +171,10 @@ const initializePlaylistSelection = async () => {
 const addSongtoPlaylist = async (event) => {
 
     const playlistname = String(event.target.textContent);
+
+    if (songid == "") {
+        await addSong();
+    }
 
     //currrently adds the song mystery lady to database
     let res = await fetch(`/playlists/addsong/${playlistname}`, {
